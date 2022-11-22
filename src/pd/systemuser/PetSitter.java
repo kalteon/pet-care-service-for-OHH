@@ -1,4 +1,5 @@
 package pd.systemuser;
 
-public class PetSitter {
+public class PetSitter extends SystemUser{
+
 }
