@@ -1,4 +1,4 @@
-package pd;
+package pd.systemuser;
 
 public class SystemUser {
 }
