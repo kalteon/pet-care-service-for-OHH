@@ -2,5 +2,9 @@
 /shelf/
 /.idea
 /out
+<<<<<<< HEAD
 out/production/pet-care-service-for-OHH/test.class
 /.project
+=======
+pet-care-service-for-OHH.iml
+>>>>>>> branch 'master' of https://github.com/so1761/pet-care-service-for-OHH.git
