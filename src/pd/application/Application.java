@@ -1,12 +1,13 @@
 package pd.application;
 
 public class Application {
-    private int applicationID;                  // 신청 ID
-    private String periodOfService;             // 이용 기간
-    private String location;                    // 위치
-    private String[] kindOfServices;            // 신청 서비스 종류
-    private int price;                          // 가격
-    private String state;                       // 진행 상황
+
+    private int applicationID;                  // ��泥� ID
+    private String periodOfService;             // �댁�� 湲곌�
+    private String location;                    // ��移�
+    private String[] kindOfServices;            // ��泥� ��鍮��� 醫�瑜�
+    private int price;                          // 媛�寃�
+    private String state;                       // 吏��� ����
 
     // setter
     public void setApplicationID(int applicationID) {
@@ -47,4 +48,5 @@ public class Application {
     public String getState() {
         return state;
     }
+
 }
