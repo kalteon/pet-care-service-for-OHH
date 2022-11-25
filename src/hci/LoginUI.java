@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
-
+@SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
 	
 	public LoginUI() {
@@ -53,9 +53,12 @@ public class LoginUI extends JFrame implements ActionListener {
 		if(ActionCmd.equals("회원 로그인")) {
 			MemberUI MemberWindow = new MemberUI();
 			MemberWindow.setVisible(true);
+			dispose();
 		}
 		else if(ActionCmd.equals("돌봄이 로그인")) {
-			
+			PetSitterUI PetSitterWindow = new PetSitterUI();
+			PetSitterWindow.setVisible(true);
+			dispose();
 		}
 		else {
 			System.out.println("Unexpected Error");

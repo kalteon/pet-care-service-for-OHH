@@ -21,8 +21,8 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-
-public class AppInfoUI extends JFrame implements ActionListener {
+@SuppressWarnings("serial")
+public class MemAppInfoUI extends JFrame implements ActionListener {
 
 	final static int nameY = 150; // 이름 항목의 Y축 좌표
 	final static int StartY = 210; // 시작 시간 항목의 Y축 좌표
@@ -55,10 +55,10 @@ public class AppInfoUI extends JFrame implements ActionListener {
 	
 	protected JComboBox<String> StartAMPMCombo;
 	protected JComboBox<String> EndAMPMCombo;
-	public AppInfoUI() {
-		super("AppInfoUI");
+	public MemAppInfoUI() {
+		super("MemAppInfoUI");
 		setSize(600, 800);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null);
 		
@@ -236,7 +236,7 @@ public class AppInfoUI extends JFrame implements ActionListener {
 		
 		JButton SubmitButton = new JButton("제출");
 		add(SubmitButton);
-		SubmitButton.setBounds(430, 700, 100, 30);
+		SubmitButton.setBounds(450, 700, 100, 30);
 		SubmitButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		SubmitButton.addActionListener(this);
 		
@@ -245,6 +245,8 @@ public class AppInfoUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String ActionCmd = e.getActionCommand();
 		if(ActionCmd.equals("뒤로가기")) {
+			MemberUI MemberWindow = new MemberUI();
+			MemberWindow.setVisible(true);
 			dispose();
 		}
 		else if(ActionCmd.equals("제출")) {
