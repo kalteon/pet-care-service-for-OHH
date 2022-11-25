@@ -19,21 +19,22 @@ import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
-public class MemberUI extends JFrame implements ActionListener{
-	public MemberUI() {
-		super("MemberUI");
+public class PetSitterUI extends JFrame implements ActionListener{
+
+	public PetSitterUI() {
+		super("PetSitterUI");
 		setSize(600, 800);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null);
 		
-		JLabel TitleLabel = new JLabel("회원 기능");
+		JLabel TitleLabel = new JLabel("돌봄이 기능");
 		TitleLabel.setHorizontalAlignment(JLabel.CENTER);
 		TitleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 50));
 		add(TitleLabel);
 		TitleLabel.setBounds(50, 50, 500, 70);
 		
-		JButton ApplicationButton = new JButton("신청하기");
+		JButton ApplicationButton = new JButton("신청 조회");
 		add(ApplicationButton);
 		ApplicationButton.setBounds(100, 300, 150, 150);
 		ApplicationButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -50,17 +51,15 @@ public class MemberUI extends JFrame implements ActionListener{
 		LogoutButton.setBounds(30, 700, 100, 30);
 		LogoutButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		LogoutButton.addActionListener(this);
-		
 	}
+	
 	
 	public void actionPerformed(ActionEvent e) {
 		String ActionCmd = e.getActionCommand();
-		if(ActionCmd.equals("신청하기")) {
-			int ans = JOptionPane.showConfirmDialog(null,"신청을 생성하시겠습니까?","확인 메세지",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-			if(ans == 0){ // 신청 생성하기
-				MemAppInfoUI AppInfoWindow = new MemAppInfoUI();
-				AppInfoWindow.setVisible(true);
-			}
+		if(ActionCmd.equals("신청 조회")) {
+			PetAppListUI AppInfoWindow = new PetAppListUI();
+			AppInfoWindow.setVisible(true);
+			dispose();
 		}
 		else if(ActionCmd.equals("신청 내역 확인")) {
 			MemAppListUI AppListWindow = new MemAppListUI();
