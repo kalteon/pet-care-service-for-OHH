@@ -1,9 +1,6 @@
-package pd.systemuser;
+package db;
 
-import db.SystemUserData;
-
-public class SystemUser {
-    // 개인 정보
+public class SystemUserData {
     protected String name;                  // 이름
     protected String birth;                 // 생년월일
     protected int age;                      // 나이
@@ -17,19 +14,18 @@ public class SystemUser {
 
     protected String userID;                // 회원 ID
 
-    // init
-    public SystemUser(SystemUserData systemUserData){
-        setName(systemUserData.getName());
-        setBirth(systemUserData.getBirth());
-        setAge(systemUserData.getAge());
-        setAddress(systemUserData.getAddress());
-        setCellPhoneContact(systemUserData.getCellPhoneContact());
-        setEmail(systemUserData.getEmail());
-        setLoginID(systemUserData.getLoginID());
-        setPassword(systemUserData.getPassword());
-        setID(systemUserData.getUserID());
+    public SystemUserData(String name, String birth, int age, String address, String cellPhoneContact, String email,
+                          String loginID, String password, String userID){
+        setName(name);
+        setBirth(birth);
+        setAge(age);
+        setAddress(address);
+        setCellPhoneContact(cellPhoneContact);
+        setEmail(email);
+        setLoginID(loginID);
+        setPassword(password);
+        setID(userID);
     }
-
     // setter
     public void setName(String name) {
         this.name = name;
@@ -55,12 +51,44 @@ public class SystemUser {
     public void setPassword(String password) {
         this.password = password;
     }
-    public void setID(String  ID) {
-        this.userID = ID;
+    public void setID(String  userID) {
+        this.userID = userID;
     }
 
-    // getter
     public String getUserID() {
         return userID;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public String getCellPhoneContact() {
+        return cellPhoneContact;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLoginID() {
+        return loginID;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
 }

@@ -1,16 +1,16 @@
 package pd.systemuser;
 
+import db.SystemUserData;
+
 public class PetSitter extends SystemUser{
     private String[] certificate;             // 소지 자격증
     private int numOfCertificate;             // 자격증 수
 
     // init
-    public PetSitter(String name, String birth, int age, String address, String cellPhoneContact,
-                     String email, String loginID, String password, int ID, String certificate) {
-        super(name, birth, age, address, cellPhoneContact, email, loginID, password, ID);
+    public PetSitter(SystemUserData systemUserData, String certificate) {
+        super(systemUserData);
         setNumOfCertificate(0);
         setCertificate(certificate);
-
     }
 
     // setter
