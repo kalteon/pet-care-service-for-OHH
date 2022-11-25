@@ -19,33 +19,23 @@ import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 
-@SuppressWarnings("serial")
-public class PetAppSearchUI extends JFrame implements ActionListener{
 
-	protected JTable AppTable;
-	protected DefaultTableModel AppModel;
-	
-	public PetAppSearchUI() {
-		super("PetAppSearchUI");
+@SuppressWarnings("serial")
+public class PetAppDetailUI extends JFrame implements ActionListener{
+
+	public PetAppDetailUI() {
+		super("PetAppDetailUI");
 		setSize(600, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null);
 		
-		String header[] = {"-", "지역", "시간"};
-		String contents[][] = {{"","",""}};
-		
-		AppModel = new DefaultTableModel(contents, header) {
-			public boolean isCellEditable(int rowIndex, int mColIndex) {
-				return false;
-			}
-		};
-		AppTable = new JTable(AppModel);
-		
-		JScrollPane SellScroll = new JScrollPane(AppTable);
-		add(SellScroll);
-		SellScroll.setBounds(20, 150, 540, 480);
-		
+		//제목 항목
+		JLabel TitleLabel = new JLabel("상세 정보");
+		TitleLabel.setHorizontalAlignment(JLabel.CENTER);
+		TitleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		add(TitleLabel);
+		TitleLabel.setBounds(50, 30, 500, 70);
 		
 		
 		JButton CancelButton = new JButton("뒤로가기");
@@ -54,23 +44,24 @@ public class PetAppSearchUI extends JFrame implements ActionListener{
 		CancelButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		CancelButton.addActionListener(this);
 		
-		JButton LookupButton = new JButton("조회");
-		add(LookupButton);
-		LookupButton.setBounds(450, 700, 100, 30);
-		LookupButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		LookupButton.addActionListener(this);
+		JButton AcceptButton = new JButton("수락");
+		add(AcceptButton);
+		AcceptButton.setBounds(450, 700, 100, 30);
+		AcceptButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		AcceptButton.addActionListener(this);
 		
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		String ActionCmd = e.getActionCommand();
 		if(ActionCmd.equals("뒤로가기")) {
-			PetSitterUI PetSitterWindow = new PetSitterUI();
-			PetSitterWindow.setVisible(true);
 			dispose();
 		}
-		else if(ActionCmd.equals("조회")) {
-			PetAppDetailUI PetAppDetailWindow = new PetAppDetailUI();
-			PetAppDetailWindow.setVisible(true);
+		else if(ActionCmd.equals("수락")) {
+			int ans = JOptionPane.showConfirmDialog(null,"신청을 수락하시겠습니까?","확인 메세지",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+			if(ans == 0){ // 신청 수락
+				JOptionPane.showMessageDialog(null,"신청 수락이 완료되었습니다","신청 수락 완료",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		else {
 			System.out.println("Unexpected Error");
