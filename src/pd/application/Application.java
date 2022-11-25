@@ -6,17 +6,17 @@ public class Application {
     private String applicationID;               // 신청 ID        형태: "userId-idIdx"
     private String periodOfService;             // 이용 시간
     private String location;                    // 위치
-    private String[] kindOfServices;            // 신청 서비스 종류
+    private String kindOfServices;            // 신청 서비스 종류
     private int price;                          // 가격
     private String state;                       // 진행 상황
-    static private int idIdx;
+    static private int idIdx;                   // 신청 ID 생성을 위한 int 변수, 1씩 증가함
     String[] stateList = {"신청 대기", "수락 대기", "결제 대기", "완료"};
 
     public Application(){
         this.applicationID = "";
         this.periodOfService = "";
         this.location = "";
-        this.kindOfServices = new String[3];
+        this.kindOfServices = "";
         this.price = 0;
         this.state = stateList[0];
     }
@@ -35,7 +35,7 @@ public class Application {
     public void setLocation(String location) {
         this.location = location;
     }
-    public void setKindOfServices(String[] kindOfServices) {
+    public void setKindOfServices(String kindOfServices) {
         this.kindOfServices = kindOfServices;
     }
     public void setPrice(int price) {
@@ -57,7 +57,7 @@ public class Application {
         return location;
     }
     public String getKindOfServices() {
-        return String.join(", ", kindOfServices);
+        return kindOfServices;
     }
     public int getPrice() {
         return price;
@@ -77,9 +77,6 @@ public class Application {
     public String requestApplication(){
         ApplicationList list = ApplicationList.getList();
         String redundantID;
-
-        String check;
-        Scanner scanner = new Scanner(System.in);
 
         redundantID = list.isExistInPresent(this.getUserID());
 

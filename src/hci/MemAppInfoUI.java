@@ -1,5 +1,8 @@
 package hci;
 
+import pd.application.Application;
+import pd.application.ApplicationList;
+
 import java.util.ArrayList;
 
 import java.awt.event.ActionEvent;
@@ -38,7 +41,7 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 	protected JTextField StartMonthField;
 	protected JTextField StartDayField;
 	protected JTextField StartHourField;
-	
+
 	protected JTextField EndYearField;
 	protected JTextField EndMonthField;
 	protected JTextField EndDayField;
@@ -252,6 +255,35 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		else if(ActionCmd.equals("제출")) {
 			int ans = JOptionPane.showConfirmDialog(null,"제출하시겠습니까?","확인 메세지",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 			if(ans == 0){ // 제출 수락
+				Application application = new Application();
+				String isRedundant;
+				int price;
+				String start = String.join(".", StartYearField.getText(), StartMonthField.getText(),
+						StartDayField.getText(), StartHourField.getText());
+				String end = String.join(".", EndYearField.getText(), EndMonthField.getText(),
+						EndDayField.getText(), EndHourField.getText());
+				application.setPeriodOfService(String.join(" ~ ", start, end));
+				application.setLocation(LocationField.getText());
+				application.setKindOfServices(String.join(", ", ServiceCheck1.getText(), ServiceCheck2.getText(),
+						ServiceCheck3.getText(), ServiceCheck4.getText()));
+				// 가격 계산 필요
+				// 회원 아이디를 얻는 법 필요
+				application.setApplicationID("임시 ID");
+
+				if((isRedundant = application.requestApplication()) != null){
+					int doYouReplace = JOptionPane.showConfirmDialog(null,
+							"신청이 존재합니다.\n대체하시겠습니까?","확인 메세지",
+							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+					if(doYouReplace == 0){
+						application.requestReplaceApplication(isRedundant);
+						application.requestApplication();
+					}
+					else{
+						JOptionPane.showMessageDialog(null,"신청이 취소되었습니다","신청 취소",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				ApplicationList list = ApplicationList.getList();
+				list.printHashTable();
 				JOptionPane.showMessageDialog(null,"신청이 완료되었습니다","신청 완료",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}

@@ -67,5 +67,6 @@ public final class ApplicationList {
         for(String key: htForPast.keySet()){
             System.out.println(key);
         }
+        System.out.println("");
     }
 }
