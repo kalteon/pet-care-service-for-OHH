@@ -1,13 +1,14 @@
 package pd.systemuser;
 
+import db.SystemUserData;
+
 public class Member extends SystemUser{
     private String enterWay;            // 출입 방법
     private int numOfPet;               // 반려동물 수
 
     // init
-    public Member(String name, String birth, int age, String address, String cellPhoneContact,
-                  String email, String loginID, String password, int ID, String enterWay, int numOfPet) {
-        super(name, birth, age, address, cellPhoneContact, email, loginID, password, ID);
+    public Member(SystemUserData systemUserData, String enterWay, int numOfPet) {
+        super(systemUserData);
         setEnterWay(enterWay);
         setNumOfPet(numOfPet);
     }
