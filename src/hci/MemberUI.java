@@ -60,6 +60,7 @@ public class MemberUI extends JFrame implements ActionListener{
 			if(ans == 0){ // 신청 생성하기
 				MemAppInfoUI AppInfoWindow = new MemAppInfoUI();
 				AppInfoWindow.setVisible(true);
+				dispose();
 			}
 		}
 		else if(ActionCmd.equals("신청 내역 확인")) {

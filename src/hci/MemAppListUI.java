@@ -86,10 +86,11 @@ public class MemAppListUI extends JFrame implements ActionListener{
 			MemberWindow.setVisible(true);
 			dispose();
 		}
-		else if(ActionCmd.equals("제출")) {
-			int ans = JOptionPane.showConfirmDialog(null,"제출하시겠습니까?","확인 메세지",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-			if(ans == 0){ // 제출 수락
-				JOptionPane.showMessageDialog(null,"신청이 완료되었습니다","신청 완료",JOptionPane.INFORMATION_MESSAGE);
+		else if(ActionCmd.equals("리뷰")) {
+			int ans = JOptionPane.showConfirmDialog(null,"리뷰를 작성하시겠습니까?","확인 메세지",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+			if(ans == 0){ // 리뷰 작성 수락
+				ReviewUI ReviewWindow = new ReviewUI();
+				ReviewWindow.setVisible(true);
 			}
 		}
 		else {

@@ -285,6 +285,9 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 				ApplicationList list = ApplicationList.getList();
 				list.printHashTable();
 				JOptionPane.showMessageDialog(null,"신청이 완료되었습니다","신청 완료",JOptionPane.INFORMATION_MESSAGE);
+				MemberUI MemberWindow = new MemberUI();
+				MemberWindow.setVisible(true);
+				dispose();
 			}
 		}
 		else {

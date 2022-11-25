@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,7 +23,18 @@ import javax.swing.table.DefaultTableModel;
 public class LoginUI extends JFrame implements ActionListener {
 	
 	public LoginUI() {
+		
 		super("LoginUI");
+		try {
+		    UIManager.setLookAndFeel("javax.swing.plaf.mac.MacLookAndFeel");
+		} catch (Exception e) {
+		    /*
+		        ClassNotFoundException
+		        InstantiationException
+		        IllegalAccessException
+		        UnsupportedLookAndFeelException
+		     */
+		}
 		setSize(600, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
