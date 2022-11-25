@@ -57,13 +57,13 @@ public class PetSitterUI extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String ActionCmd = e.getActionCommand();
 		if(ActionCmd.equals("신청 조회")) {
-			PetAppListUI AppInfoWindow = new PetAppListUI();
-			AppInfoWindow.setVisible(true);
+			PetAppSearchUI PetAppSearchWindow = new PetAppSearchUI();
+			PetAppSearchWindow.setVisible(true);
 			dispose();
 		}
 		else if(ActionCmd.equals("신청 내역 확인")) {
-			MemAppListUI AppListWindow = new MemAppListUI();
-			AppListWindow.setVisible(true);
+			PetAppListUI PetAppListWindow = new PetAppListUI();
+			PetAppListWindow.setVisible(true);
 			dispose();
 		}
 		else if(ActionCmd.equals("로그아웃")) {

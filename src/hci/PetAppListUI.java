@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +26,7 @@ public class PetAppListUI extends JFrame implements ActionListener{
 	protected JTable AppTable;
 	protected DefaultTableModel AppModel;
 	
+	
 	public PetAppListUI() {
 		super("PetAppListUI");
 		setSize(600, 800);
@@ -32,7 +34,14 @@ public class PetAppListUI extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setLayout(null);
 		
-		String header[] = {"-", "지역", "시간"};
+		//제목 항목
+		JLabel TitleLabel = new JLabel("신청 내역");
+		TitleLabel.setHorizontalAlignment(JLabel.CENTER);
+		TitleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		add(TitleLabel);
+		TitleLabel.setBounds(50, 30, 500, 70);
+		
+		String header[] = {"A", "B", "C"};
 		String contents[][] = {{"","",""}};
 		
 		AppModel = new DefaultTableModel(contents, header) {
@@ -46,19 +55,17 @@ public class PetAppListUI extends JFrame implements ActionListener{
 		add(SellScroll);
 		SellScroll.setBounds(20, 150, 540, 480);
 		
-		
-		
 		JButton CancelButton = new JButton("뒤로가기");
 		add(CancelButton);
 		CancelButton.setBounds(30, 700, 100, 30);
 		CancelButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		CancelButton.addActionListener(this);
 		
-		JButton LookupButton = new JButton("조회");
-		add(LookupButton);
-		LookupButton.setBounds(450, 700, 100, 30);
-		LookupButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		LookupButton.addActionListener(this);
+		JButton AppCancelButton = new JButton("신청 취소");
+		add(AppCancelButton);
+		AppCancelButton.setBounds(450, 700, 100, 30);
+		AppCancelButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		AppCancelButton.addActionListener(this);
 		
 	}
 	public void actionPerformed(ActionEvent e) {
@@ -68,8 +75,11 @@ public class PetAppListUI extends JFrame implements ActionListener{
 			PetSitterWindow.setVisible(true);
 			dispose();
 		}
-		else if(ActionCmd.equals("조회")) {
-			
+		else if(ActionCmd.equals("신청 취소")) {
+			int ans = JOptionPane.showConfirmDialog(null,"정말 신청을 취소하시겠습니까?","확인 메세지",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+			if(ans == 0){ // 신청 취소 수락
+				JOptionPane.showMessageDialog(null,"신청이 취소되었습니다","신청 취소 완료",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		else {
 			System.out.println("Unexpected Error");

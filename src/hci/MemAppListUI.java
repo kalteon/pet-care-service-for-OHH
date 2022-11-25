@@ -34,6 +34,13 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setLayout(null);
 		
+		//제목 항목
+		JLabel TitleLabel = new JLabel("신청 내역");
+		TitleLabel.setHorizontalAlignment(JLabel.CENTER);
+		TitleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		add(TitleLabel);
+		TitleLabel.setBounds(50, 30, 500, 70);
+		
 		String header[] = {"A", "B", "C"};
 		String contents[][] = {{"","",""}};
 		
