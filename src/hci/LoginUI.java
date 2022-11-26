@@ -7,8 +7,15 @@ import java.awt.Font;
 
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
+/*	 로그인 화면입니다
+ * 
+ *  타이틀 화면(추가 예정)
+ *  회원 로그인 -> MemberUI
+ *  돌봄이 로그인 -> PetSitterUI
+ *  종료 -> Exit
+ *  로 구성됩니다.
+ */
 
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
@@ -23,10 +30,9 @@ public class LoginUI extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setLayout(null);
 				
-		c = new Color(188,204,250);
-		getContentPane().setBackground(c);
+		getContentPane().setBackground(Color.WHITE); // 배경색 설정
 
-		
+		// 타이틀 추가 예정
 		/*
 		JLabel TitleLabel = new JLabel("로그인 선택");
 		TitleLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -35,16 +41,17 @@ public class LoginUI extends JFrame implements ActionListener {
 		TitleLabel.setBounds(50, 50, 500, 70);
 		*/
 		
+		// 회원 로그인 버튼
 		RoundedButton MemberLoginButton = new RoundedButton("회원 로그인");
 		add(MemberLoginButton);
 		c = new Color(64,126,219);
-		MemberLoginButton.setBackground(c);
-		MemberLoginButton.setForeground(Color.WHITE);
-		MemberLoginButton.setBounds(30, 550, 530, 50);
-		MemberLoginButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		MemberLoginButton.addActionListener(this);
+		MemberLoginButton.setBackground(c); // 버튼 색깔
+		MemberLoginButton.setForeground(Color.WHITE); // 버튼 글자 색깔
+		MemberLoginButton.setBounds(30, 550, 530, 50); // 위치 설정 (x,y,width,height)
+		MemberLoginButton.setFont(new Font("맑은 고딕", Font.BOLD, 20)); // 글꼴 설정
+		MemberLoginButton.addActionListener(this); // 이벤트 처리 등록
 		
-		
+		// 돌봄이 로그인 버튼
 		RoundedButton PetSitterLoginButton = new RoundedButton("돌봄이 로그인");
 		add(PetSitterLoginButton);
 		c = new Color(64,126,219);
@@ -54,16 +61,19 @@ public class LoginUI extends JFrame implements ActionListener {
 		PetSitterLoginButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		PetSitterLoginButton.addActionListener(this);
 		
+		// 종료 버튼
 		RoundedButton ExitButton = new RoundedButton("종료하기");
 		add(ExitButton);
-		ExitButton.setBackground(Color.WHITE);
+		c = new Color(162,202,255);
+		ExitButton.setBackground(c);
 		ExitButton.setBounds(30, 670, 530, 50);
+		ExitButton.setForeground(Color.WHITE);
 		ExitButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		ExitButton.addActionListener(this);
 		
 	}
 	
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { // 버튼 눌렀을 시 이벤트 처리
 		String ActionCmd = e.getActionCommand();
 		if(ActionCmd.equals("회원 로그인")) {
 			MemberUI MemberWindow = new MemberUI();
@@ -76,8 +86,8 @@ public class LoginUI extends JFrame implements ActionListener {
 			dispose();
 		}
 		else if(ActionCmd.equals("종료하기")) {
-			int ans = JOptionPane.showConfirmDialog(null,"정말 종료하시겠습니까?","확인 메세지",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-			if(ans == 0){ // 종료하기
+			int ans = ConfirmUI.showConfirmDialog(this,"정말 종료하시겠습니까?","확인 메세지",ConfirmUI.YES_NO_OPTION);
+			if(ans == 0){ // 종료하기 선택 (Yes = 0 / No = 1)
 				System.exit(0);
 			}
 			
