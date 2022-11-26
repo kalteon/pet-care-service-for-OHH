@@ -9,9 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class UserDB {
-	private File file;
-	private ObjectOutputStream write;
-	private ObjectInputStream read;
+	private File file; //파일경로
+	private ObjectOutputStream write; //파일에 객체의 정보를 입력하는 스트림
+	private ObjectInputStream read; //파일에 저장되어있는 객체를 읽어오는 스트림
 	
 	public UserDB(String filePath) {
 		file = new File(filePath);
@@ -27,7 +27,7 @@ public class UserDB {
 			e.printStackTrace();
 		}
 	}
-	public void WriteObjectData(Object a) {
+	public void writeObjectData(Object a) {
 		try {
 			write.writeObject(a);
 		} catch (IOException e) {
@@ -35,24 +35,21 @@ public class UserDB {
 			e.printStackTrace();
 		}
 	}
-	public Object ReadObjecfData() {
-		Object temp = new Object();
+	public Object readObjecfData() {
 		try {
-			temp = (Object)read.readObject();
+			Object temp = (Object)read.readObject();
 			return temp;
 		} catch (ClassNotFoundException e) {
 			System.out.print("file read false");
-			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.print("file read false");
-			e.printStackTrace();
 		}
-		return temp;
+		return null; // 못 읽으면 null 반환
 	}
-	public void DeletObjectData() {
+	public void deletObjectData() {
 		file.delete();
 	}
-	public void Close() {
+	public void close() {
 		try {
 			write.close();
 		} catch (IOException e) {
