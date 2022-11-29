@@ -51,8 +51,10 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 	Color c;
 	String name = "박태정";
 	String Location = "경북대학교 IT 대학";
-	String price = "10,000원";
-	int curPrice = 10000;
+	String price = "15,000원";
+	int curPrice = 15000;
+	int[] priceSet = new int[3];
+
 
 	// 버튼 이미지 & 크기 변환
 	ImageIcon Cancelimg1 = new ImageIcon("././Image/CancelButton1.png");
@@ -68,10 +70,10 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 	
 	protected JTextField NameField;
 	
-	protected JTextField StartYearField;
-	protected JTextField StartMonthField;
-	protected JTextField StartDayField;
-	protected JTextField StartHourField;
+//	protected JTextField StartYearField;
+//	protected JTextField StartMonthField;
+//	protected JTextField StartDayField;
+//	protected JTextField StartHourField;
 
 	protected JLabel StartYearNumLabel;
 	protected JLabel EndYearNumLabel;
@@ -80,10 +82,10 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 	protected JComboBox<String> StartDayCombo;
 	protected JComboBox<String> StartHourCombo;
 
-	protected JTextField EndYearField;
-	protected JTextField EndMonthField;
-	protected JTextField EndDayField;
-	protected JTextField EndHourField;
+//	protected JTextField EndYearField;
+//	protected JTextField EndMonthField;
+//	protected JTextField EndDayField;
+//	protected JTextField EndHourField;
 
 	protected JComboBox<String> EndMonthCombo;
 	protected JComboBox<String> EndDayCombo;
@@ -94,7 +96,7 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 	protected JCheckBox ServiceCheck1;
 	protected JCheckBox ServiceCheck2;
 	protected JCheckBox ServiceCheck3;
-	protected JCheckBox ServiceCheck4;
+//	protected JCheckBox ServiceCheck4;
 	
 	protected JTextField PriceField;
 	
@@ -186,12 +188,12 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 
 		String[] YearString = new String[12];
 		for(int i = 0;i<12;i++){
-			YearString[i] = Integer.toString(i+1);
+			YearString[i] = String.format("%02d", i+1);
 		}
 
 		String[] DayString = new String[31];
 		for(int i = 0;i<31;i++){
-			DayString[i] = Integer.toString(i+1);
+			DayString[i] = String.format("%02d", i+1);
 		}
 
 		StartYearNumLabel = new JLabel("2022");
@@ -428,16 +430,20 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		ContentPanel.add(ServiceTypeLabel);
 		ServiceTypeLabel.setBounds(30,ServiceY1,130,30);
 		ServiceTypeLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		ServiceCheck1 = new JCheckBox("산책 - 5000 원");
+
+		// 가격 정보 초기화
+		priceSet[0] = 5000;
+		priceSet[1] = 20000;
+		priceSet[2] = 50000;
+
+		ServiceCheck1 = new JCheckBox("산책 - 5,000 원");
 		ServiceCheck1.addActionListener(e -> {
 			JCheckBox jCheckBox = (JCheckBox) e.getSource();
-			String changedPrice = jCheckBox.getText().split(" -")[1].split(" ")[1];
 			if(jCheckBox.isSelected()){
-				curPrice = curPrice + Integer.parseInt(changedPrice);
+				curPrice = curPrice + priceSet[0];
 			}
 			else{
-				curPrice = curPrice - Integer.parseInt(changedPrice);
+				curPrice = curPrice - priceSet[0];
 			}
 			String result = formatter.format(curPrice) + "원";
 			PriceField.setText(result);
@@ -446,16 +452,16 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		ServiceCheck1.setBounds(140,ServiceY1,180,30);
 		ServiceCheck1.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		ServiceCheck1.setBackground(Color.WHITE);
-		
-		ServiceCheck2 = new JCheckBox("목욕 - 20000 원");
+
+
+		ServiceCheck2 = new JCheckBox("목욕 - 20,000 원");
 		ServiceCheck2.addActionListener(e -> {
 				JCheckBox jCheckBox = (JCheckBox) e.getSource();
-				String changedPrice = jCheckBox.getText().split(" -")[1].split(" ")[1];
 				if(jCheckBox.isSelected()){
-					curPrice = curPrice + Integer.parseInt(changedPrice);
+					curPrice = curPrice + priceSet[1];
 				}
 				else{
-					curPrice = curPrice - Integer.parseInt(changedPrice);
+					curPrice = curPrice - priceSet[1];
 				}
 				String result = formatter.format(curPrice) + "원";
 				PriceField.setText(result);
@@ -465,15 +471,14 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		ServiceCheck2.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		ServiceCheck2.setBackground(Color.WHITE);
 		
-		ServiceCheck3 = new JCheckBox("미용 - 50000 원");
+		ServiceCheck3 = new JCheckBox("미용 - 50,000 원");
 		ServiceCheck3.addActionListener(e -> {
 			JCheckBox jCheckBox = (JCheckBox) e.getSource();
-			String changedPrice = jCheckBox.getText().split(" -")[1].split(" ")[1];
 			if(jCheckBox.isSelected()){
-				curPrice = curPrice + Integer.parseInt(changedPrice);
+				curPrice = curPrice + priceSet[2];
 			}
 			else{
-				curPrice = curPrice - Integer.parseInt(changedPrice);
+				curPrice = curPrice - priceSet[2];
 			}
 			String result = formatter.format(curPrice) + "원";
 			PriceField.setText(result);
@@ -558,14 +563,15 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 			if(ans == 0){ // 제출 수락
 				Application application = new Application();
 				String isRedundant;
-				int price;
+				String services = "";
+
 				String start = String.join(".", StartYearNumLabel.getText(), StartMonthCombo.getSelectedItem().toString(),
 						StartDayCombo.getSelectedItem().toString(), StartHourCombo.getSelectedItem().toString());
 				String end = String.join(".", EndYearNumLabel.getText(), EndMonthCombo.getSelectedItem().toString(),
 						EndDayCombo.getSelectedItem().toString(), EndHourCombo.getSelectedItem().toString());
 				application.setPeriodOfService(String.join(" ~ ", start, end));
 				application.setLocation(LocationField.getText());
-				String services = "";
+
 				if(ServiceCheck1.isSelected()){
 					services = services + ServiceCheck1.getText().split(" ")[0];
 				}
@@ -582,7 +588,7 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 					services = services + ServiceCheck3.getText().split(" ")[0];
 				}
 				application.setKindOfServices(services);
-				application.setPrice(curPrice);
+				application.setPrice(PriceField.getText());
 				// 회원 아이디를 얻는 법 필요
 				application.setApplicationID("임시 ID");
 
@@ -599,8 +605,6 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 						dispose();
 					}
 				}
-				ApplicationList list = ApplicationList.getList();
-//				list.printHashTable();
 				ConfirmUI.showMessageDialog(this,"신청이 완료되었습니다","신청 완료");
 				MemberUI MemberWindow = new MemberUI();
 				MemberWindow.setVisible(true);
