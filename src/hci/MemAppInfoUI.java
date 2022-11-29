@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,19 +39,21 @@ import javax.swing.JCheckBox;
 @SuppressWarnings("serial")
 public class MemAppInfoUI extends JFrame implements ActionListener {
 
-	final static int nameY = 20; // 이름 항목의 Y축 좌표
-	final static int StartY = 80; // 시작 시간 항목의 Y축 좌표
-	final static int EndY = 140; // 종료 시간 항목의 Y축 좌표
-	final static int LocationY = 200; // 위치 항목의 Y축 좌표
-	final static int ServiceY1 = 260; // 서비스 종류 항목의 Y축 좌표 1
-	final static int ServiceY2 = 320; // 서비스 종류 항목의 Y축 좌표 2
-	final static int priceY = 380; // 가격 항목의 Y축 좌표
-	
+	final static int nameY = 20; 				// 이름 항목의 Y축 좌표
+	final static int StartY = 80; 				// 시작 시간 항목의 Y축 좌표
+	final static int EndY = 140; 				// 종료 시간 항목의 Y축 좌표
+	final static int LocationY = 200; 			// 위치 항목의 Y축 좌표
+	final static int ServiceY1 = 260; 			// 서비스 종류 항목의 Y축 좌표 1
+	final static int ServiceY2 = 320; 			// 서비스 종류 항목의 Y축 좌표 2
+	final static int priceY = 380;				// 가격 항목의 Y축 좌표
+
+	DecimalFormat formatter = new DecimalFormat("###,###");
 	Color c;
 	String name = "박태정";
 	String Location = "경북대학교 IT 대학";
-	String price = "40,000원";
-	
+	String price = "10,000원";
+	int curPrice = 10000;
+
 	// 버튼 이미지 & 크기 변환
 	ImageIcon Cancelimg1 = new ImageIcon("././Image/CancelButton1.png");
 	ImageIcon Cancelimg2 = new ImageIcon("././Image/CancelButton2.png");
@@ -70,10 +73,21 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 	protected JTextField StartDayField;
 	protected JTextField StartHourField;
 
+	protected JLabel StartYearNumLabel;
+	protected JLabel EndYearNumLabel;
+
+	protected JComboBox<String> StartMonthCombo;
+	protected JComboBox<String> StartDayCombo;
+	protected JComboBox<String> StartHourCombo;
+
 	protected JTextField EndYearField;
 	protected JTextField EndMonthField;
 	protected JTextField EndDayField;
 	protected JTextField EndHourField;
+
+	protected JComboBox<String> EndMonthCombo;
+	protected JComboBox<String> EndDayCombo;
+	protected JComboBox<String> EndHourCombo;
 	
 	protected JTextField LocationField;
 	
@@ -146,98 +160,133 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		StartTimeLabel.setBounds(30,StartY,80,30);
 		StartTimeLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		StartYearField = new JTextField(){
-            @Override
-            public void setBorder(Border border) {
-                
-            }
-        };
-        
-    	ContentPanel.add(StartYearField);
-		StartYearField.setBounds(140,StartY,40,31);
-		StartYearField.setBackground(Color.WHITE);
-		StartYearField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		// 텍스트 필드와 배경색이 같아 밑에 구분선 추가
-		JSeparator JSepStartYear = new JSeparator();
-		ContentPanel.add(JSepStartYear);
-		JSepStartYear.setBounds(140, StartY+31, 40, 30);
+//		StartYearField = new JTextField(){
+//            @Override
+//            public void setBorder(Border border) {
+//
+//            }
+//        };
+//
+//    	ContentPanel.add(StartYearField);
+//		StartYearField.setBounds(140,StartY,40,31);
+//		StartYearField.setBackground(Color.WHITE);
+//		StartYearField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+//
+//		// 텍스트 필드와 배경색이 같아 밑에 구분선 추가
+//		JSeparator JSepStartYear = new JSeparator();
+//		ContentPanel.add(JSepStartYear);
+//		JSepStartYear.setBounds(140, StartY+31, 40, 30);
 
-		
+//		// 시작 시간 년도를 고르는 ComboBox
+//		String AMPMString[] = {"오전", "오후"};
+//		StartAMPMCombo = new JComboBox<String>(AMPMString);
+//		ContentPanel.add(StartAMPMCombo);
+//		StartAMPMCombo.setBounds(330,StartY,70,30);
+//		StartAMPMCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
+		String[] YearString = new String[12];
+		for(int i = 0;i<12;i++){
+			YearString[i] = Integer.toString(i+1);
+		}
+
+		String[] DayString = new String[31];
+		for(int i = 0;i<31;i++){
+			DayString[i] = Integer.toString(i+1);
+		}
+
+		StartYearNumLabel = new JLabel("2022");
+		ContentPanel.add(StartYearNumLabel);
+		StartYearNumLabel.setBounds(140,StartY,50,30);
+		StartYearNumLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
 		JLabel StartYearLabel = new JLabel("년");
 		ContentPanel.add(StartYearLabel);
-		StartYearLabel.setBounds(185,StartY,90,30);
+		StartYearLabel.setBounds(180,StartY,90,30);
 		StartYearLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		StartMonthField = new JTextField(){
-            @Override
-            public void setBorder(Border border) {
-                
-            }
-        };;
-    	ContentPanel.add(StartMonthField);
-		StartMonthField.setBounds(210,StartY,30,31);
-		StartMonthField.setBackground(Color.WHITE);
-		StartMonthField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		JSeparator JSepStartMonth = new JSeparator();
-		ContentPanel.add(JSepStartMonth);
-		JSepStartMonth.setBounds(210, StartY+31, 30, 30);
-		
+//		StartMonthField = new JTextField(){
+//            @Override
+//            public void setBorder(Border border) {
+//
+//            }
+//        };;
+//    	ContentPanel.add(StartMonthField);
+//		StartMonthField.setBounds(210,StartY,30,31);
+//		StartMonthField.setBackground(Color.WHITE);
+//		StartMonthField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+//
+//		JSeparator JSepStartMonth = new JSeparator();
+//		ContentPanel.add(JSepStartMonth);
+//		JSepStartMonth.setBounds(210, StartY+31, 30, 30);
+
+		StartMonthCombo = new JComboBox<>(YearString);
+		ContentPanel.add(StartMonthCombo);
+		StartMonthCombo.setBounds(200, StartY, 50, 30);
+		StartMonthCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
 		JLabel StartMonthLabel = new JLabel("월");
 		ContentPanel.add(StartMonthLabel);
-		StartMonthLabel.setBounds(245,StartY,90,30);
+		StartMonthLabel.setBounds(250,StartY,90,30);
 		StartMonthLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		
-		StartDayField = new JTextField(){
-            @Override
-            public void setBorder(Border border) {
-                
-            }
-        };
-        
-		ContentPanel.add(StartDayField);
-		StartDayField.setBounds(270,StartY,30,31);
-		StartDayField.setBackground(Color.WHITE);
-		StartDayField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		JSeparator JSepStartDay = new JSeparator();
-		ContentPanel.add(JSepStartDay);
-		JSepStartDay.setBounds(270, StartY+31, 30, 30);
-		
-		
+
+//		StartDayField = new JTextField(){
+//            @Override
+//            public void setBorder(Border border) {
+//
+//            }
+//        };
+//
+//		ContentPanel.add(StartDayField);
+//		StartDayField.setBounds(270,StartY,30,31);
+//		StartDayField.setBackground(Color.WHITE);
+//		StartDayField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+//
+//		JSeparator JSepStartDay = new JSeparator();
+//		ContentPanel.add(JSepStartDay);
+//		JSepStartDay.setBounds(270, StartY+31, 30, 30);
+
+		StartDayCombo = new JComboBox<>(DayString);
+		ContentPanel.add(StartDayCombo);
+		StartDayCombo.setBounds(280, StartY, 50, 30);
+		StartDayCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
+
 		JLabel StartDayLabel = new JLabel("일");
 		ContentPanel.add(StartDayLabel);
-		StartDayLabel.setBounds(305,StartY,90,30);
+		StartDayLabel.setBounds(330,StartY,90,30);
 		StartDayLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
 		// 오전 오후를 고르는 ComboBox
-		String AMPMString[] = {"오전", "오후"};
+		String[] AMPMString = {"오전", "오후"};
 		StartAMPMCombo = new JComboBox<String>(AMPMString);
 		ContentPanel.add(StartAMPMCombo);
-		StartAMPMCombo.setBounds(330,StartY,70,30);
+		StartAMPMCombo.setBounds(360,StartY,70,30);
 		StartAMPMCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		StartHourField = new JTextField(){
-            @Override
-            public void setBorder(Border border) {
-                
-            }
-        };
-		ContentPanel.add(StartHourField);
-		StartHourField.setBounds(410,StartY,30,31);
-		StartHourField.setBackground(Color.WHITE);
-		StartHourField.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		
-		JSeparator JSepStartHour = new JSeparator();
-		ContentPanel.add(JSepStartHour);
-		JSepStartHour.setBounds(410, StartY+31, 30, 30);
-		
-		
+
+
+//		StartHourField = new JTextField(){
+//            @Override
+//            public void setBorder(Border border) {
+//
+//            }
+//        };
+//		ContentPanel.add(StartHourField);
+//		StartHourField.setBounds(410,StartY,30,31);
+//		StartHourField.setBackground(Color.WHITE);
+//		StartHourField.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+//
+//		JSeparator JSepStartHour = new JSeparator();
+//		ContentPanel.add(JSepStartHour);
+//		JSepStartHour.setBounds(410, StartY+31, 30, 30);
+
+		StartHourCombo = new JComboBox<>(YearString);
+		ContentPanel.add(StartHourCombo);
+		StartHourCombo.setBounds(430, StartY, 50, 30);
+		StartHourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
 		JLabel StartHourLabel = new JLabel("시");
 		ContentPanel.add(StartHourLabel);
-		StartHourLabel.setBounds(445,StartY,80,30);
+		StartHourLabel.setBounds(480,StartY,80,30);
 		StartHourLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
 		
@@ -247,93 +296,112 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		EndTimeLabel.setBounds(30,EndY,80,30);
 		EndTimeLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		EndYearField = new JTextField(){
-            @Override
-            public void setBorder(Border border) {
-                
-            }
-        };
-		ContentPanel.add(EndYearField);
-		EndYearField.setBounds(140,EndY,40,31);
-		EndYearField.setBackground(Color.WHITE);
-		EndYearField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		JSeparator JSepEndYear = new JSeparator();
-		ContentPanel.add(JSepEndYear);
-		JSepEndYear.setBounds(140, EndY+31, 40, 30);
-		
+//		EndYearField = new JTextField(){
+//            @Override
+//            public void setBorder(Border border) {
+//
+//            }
+//        };
+//		ContentPanel.add(EndYearField);
+//		EndYearField.setBounds(140,EndY,40,31);
+//		EndYearField.setBackground(Color.WHITE);
+//		EndYearField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+//
+//		JSeparator JSepEndYear = new JSeparator();
+//		ContentPanel.add(JSepEndYear);
+//		JSepEndYear.setBounds(140, EndY+31, 40, 30);
+
+
+		EndYearNumLabel = new JLabel("2022");
+		ContentPanel.add(EndYearNumLabel);
+		EndYearNumLabel.setBounds(140,EndY,40,30);
+		EndYearNumLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
 		JLabel EndYearLabel = new JLabel("년");
 		ContentPanel.add(EndYearLabel);
-		EndYearLabel.setBounds(185,EndY,80,30);
+		EndYearLabel.setBounds(180,EndY,40,30);
 		EndYearLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		EndMonthField = new JTextField(){
-            @Override
-            public void setBorder(Border border) {
-                
-            }
-        };
-		ContentPanel.add(EndMonthField);
-		EndMonthField.setBounds(210,EndY,30,31);
-		EndMonthField.setBackground(Color.WHITE);
-		EndMonthField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		
-		JSeparator JSepEndMonth = new JSeparator();
-		ContentPanel.add(JSepEndMonth);
-		JSepEndMonth.setBounds(210, EndY+31, 30, 30);
-		
-		
+//		EndMonthField = new JTextField(){
+//            @Override
+//            public void setBorder(Border border) {
+//
+//            }
+//        };
+//		ContentPanel.add(EndMonthField);
+//		EndMonthField.setBounds(210,EndY,30,31);
+//		EndMonthField.setBackground(Color.WHITE);
+//		EndMonthField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+//
+//
+//		JSeparator JSepEndMonth = new JSeparator();
+//		ContentPanel.add(JSepEndMonth);
+//		JSepEndMonth.setBounds(210, EndY+31, 30, 30);
+
+		EndMonthCombo = new JComboBox<>(YearString);
+		ContentPanel.add(EndMonthCombo);
+		EndMonthCombo.setBounds(200, EndY, 50, 30);
+		EndMonthCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
 		JLabel EndMonthLabel = new JLabel("월");
 		ContentPanel.add(EndMonthLabel);
-		EndMonthLabel.setBounds(245,EndY,80,30);
+		EndMonthLabel.setBounds(250,EndY,80,30);
 		EndMonthLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		
-		
-		EndDayField = new JTextField(){
-            @Override
-            public void setBorder(Border border) {
-                
-            }
-        };
-		ContentPanel.add(EndDayField);
-		EndDayField.setBounds(270,EndY,30,31);
-		EndDayField.setBackground(Color.WHITE);
-		EndDayField.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		
-		JSeparator JSepEndDay = new JSeparator();
-		ContentPanel.add(JSepEndDay);
-		JSepEndDay.setBounds(270, EndY+31, 30, 30);
-		
+
+//		EndDayField = new JTextField(){
+//            @Override
+//            public void setBorder(Border border) {
+//
+//            }
+//        };
+//		ContentPanel.add(EndDayField);
+//		EndDayField.setBounds(270,EndY,30,31);
+//		EndDayField.setBackground(Color.WHITE);
+//		EndDayField.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+//
+//		JSeparator JSepEndDay = new JSeparator();
+//		ContentPanel.add(JSepEndDay);
+//		JSepEndDay.setBounds(270, EndY+31, 30, 30);
+
+		EndDayCombo = new JComboBox<>(DayString);
+		ContentPanel.add(EndDayCombo);
+		EndDayCombo.setBounds(280, EndY, 50, 30);
+		EndDayCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
 		JLabel EndDayLabel = new JLabel("일");
 		ContentPanel.add(EndDayLabel);
-		EndDayLabel.setBounds(305,EndY,80,30);
+		EndDayLabel.setBounds(330,EndY,80,30);
 		EndDayLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		EndAMPMCombo = new JComboBox<String>(AMPMString);
+		EndAMPMCombo = new JComboBox<>(AMPMString);
 		ContentPanel.add(EndAMPMCombo);
-		EndAMPMCombo.setBounds(330,EndY,70,30);
+		EndAMPMCombo.setBounds(360,EndY,70,30);
 		EndAMPMCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		EndHourField = new JTextField(){
-            @Override
-            public void setBorder(Border border) {
-                
-            }
-        };
-		ContentPanel.add(EndHourField);
-		EndHourField.setBounds(410,EndY,30,31);
-		EndHourField.setBackground(Color.WHITE);
-		EndHourField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		JSeparator JSepEndHour = new JSeparator();
-		ContentPanel.add(JSepEndHour);
-		JSepEndHour.setBounds(410, EndY+31, 30, 30);
-		
+//		EndHourField = new JTextField(){
+//            @Override
+//            public void setBorder(Border border) {
+//
+//            }
+//        };
+//		ContentPanel.add(EndHourField);
+//		EndHourField.setBounds(410,EndY,30,31);
+//		EndHourField.setBackground(Color.WHITE);
+//		EndHourField.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+//
+//		JSeparator JSepEndHour = new JSeparator();
+//		ContentPanel.add(JSepEndHour);
+//		JSepEndHour.setBounds(410, EndY+31, 30, 30);
+
+		EndHourCombo = new JComboBox<>(YearString);
+		ContentPanel.add(EndHourCombo);
+		EndHourCombo.setBounds(430, EndY, 50, 30);
+		EndHourCombo.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+
 		JLabel EndHourLabel = new JLabel("시");
 		ContentPanel.add(EndHourLabel);
-		EndHourLabel.setBounds(445,EndY,80,30);
+		EndHourLabel.setBounds(480,EndY,80,30);
 		EndHourLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
 		
@@ -361,30 +429,66 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		ServiceTypeLabel.setBounds(30,ServiceY1,130,30);
 		ServiceTypeLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		ServiceCheck1 = new JCheckBox("서비스 1");
+		ServiceCheck1 = new JCheckBox("산책 - 5000 원");
+		ServiceCheck1.addActionListener(e -> {
+			JCheckBox jCheckBox = (JCheckBox) e.getSource();
+			String changedPrice = jCheckBox.getText().split(" -")[1].split(" ")[1];
+			if(jCheckBox.isSelected()){
+				curPrice = curPrice + Integer.parseInt(changedPrice);
+			}
+			else{
+				curPrice = curPrice - Integer.parseInt(changedPrice);
+			}
+			String result = formatter.format(curPrice) + "원";
+			PriceField.setText(result);
+		});
 		ContentPanel.add(ServiceCheck1);
-		ServiceCheck1.setBounds(140,ServiceY1,150,30);
+		ServiceCheck1.setBounds(140,ServiceY1,180,30);
 		ServiceCheck1.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		ServiceCheck1.setBackground(Color.WHITE);
 		
-		ServiceCheck2 = new JCheckBox("서비스 2");
+		ServiceCheck2 = new JCheckBox("목욕 - 20000 원");
+		ServiceCheck2.addActionListener(e -> {
+				JCheckBox jCheckBox = (JCheckBox) e.getSource();
+				String changedPrice = jCheckBox.getText().split(" -")[1].split(" ")[1];
+				if(jCheckBox.isSelected()){
+					curPrice = curPrice + Integer.parseInt(changedPrice);
+				}
+				else{
+					curPrice = curPrice - Integer.parseInt(changedPrice);
+				}
+				String result = formatter.format(curPrice) + "원";
+				PriceField.setText(result);
+	});
 		ContentPanel.add(ServiceCheck2);
-		ServiceCheck2.setBounds(350,ServiceY1,150,30);
+		ServiceCheck2.setBounds(350,ServiceY1,180,30);
 		ServiceCheck2.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		ServiceCheck2.setBackground(Color.WHITE);
 		
-		ServiceCheck3 = new JCheckBox("서비스 3");
+		ServiceCheck3 = new JCheckBox("미용 - 50000 원");
+		ServiceCheck3.addActionListener(e -> {
+			JCheckBox jCheckBox = (JCheckBox) e.getSource();
+			String changedPrice = jCheckBox.getText().split(" -")[1].split(" ")[1];
+			if(jCheckBox.isSelected()){
+				curPrice = curPrice + Integer.parseInt(changedPrice);
+			}
+			else{
+				curPrice = curPrice - Integer.parseInt(changedPrice);
+			}
+			String result = formatter.format(curPrice) + "원";
+			PriceField.setText(result);
+		});
 		ContentPanel.add(ServiceCheck3);
-		ServiceCheck3.setBounds(140,ServiceY2,150,30);
+		ServiceCheck3.setBounds(140,ServiceY2,180,30);
 		ServiceCheck3.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		ServiceCheck3.setBackground(Color.WHITE);
 		
-		ServiceCheck4 = new JCheckBox("서비스 4");
-		ContentPanel.add(ServiceCheck4);
-		ServiceCheck4.setBounds(350,ServiceY2,150,30);
-		ServiceCheck4.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		ServiceCheck4.setBackground(Color.WHITE);
-		
+//		ServiceCheck4 = new JCheckBox("서비스 4");
+//		ContentPanel.add(ServiceCheck4);
+//		ServiceCheck4.setBounds(350,ServiceY2,150,30);
+//		ServiceCheck4.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+//		ServiceCheck4.setBackground(Color.WHITE);
+//
 		// 가격 항목
 		JLabel PriceLabel = new JLabel("가격 ");
 		ContentPanel.add(PriceLabel);
@@ -429,7 +533,19 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		SubmitButton.addActionListener(this);
 		
 	}
-	
+
+	public void myActionListener(ActionEvent e){
+		JCheckBox jCheckBox = (JCheckBox) e.getSource();
+		String changedPrice = jCheckBox.getText().split(" -")[1].split(" ")[1];
+		if(jCheckBox.isSelected()){
+			curPrice = curPrice + Integer.parseInt(changedPrice);
+		}
+		else{
+			curPrice = curPrice - Integer.parseInt(changedPrice);
+		}
+		String result = formatter.format(curPrice) + "원";
+		PriceField.setText(result);
+	}
 	public void actionPerformed(ActionEvent e) {
 		String ActionCmd = e.getActionCommand();
 		if(ActionCmd.equals("뒤로가기")) {
@@ -443,15 +559,30 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 				Application application = new Application();
 				String isRedundant;
 				int price;
-				String start = String.join(".", StartYearField.getText(), StartMonthField.getText(),
-						StartDayField.getText(), StartHourField.getText());
-				String end = String.join(".", EndYearField.getText(), EndMonthField.getText(),
-						EndDayField.getText(), EndHourField.getText());
+				String start = String.join(".", StartYearNumLabel.getText(), StartMonthCombo.getSelectedItem().toString(),
+						StartDayCombo.getSelectedItem().toString(), StartHourCombo.getSelectedItem().toString());
+				String end = String.join(".", EndYearNumLabel.getText(), EndMonthCombo.getSelectedItem().toString(),
+						EndDayCombo.getSelectedItem().toString(), EndHourCombo.getSelectedItem().toString());
 				application.setPeriodOfService(String.join(" ~ ", start, end));
 				application.setLocation(LocationField.getText());
-				application.setKindOfServices(String.join(", ", ServiceCheck1.getText(), ServiceCheck2.getText(),
-						ServiceCheck3.getText(), ServiceCheck4.getText()));
-				// 가격 계산 필요
+				String services = "";
+				if(ServiceCheck1.isSelected()){
+					services = services + ServiceCheck1.getText().split(" ")[0];
+				}
+				if(ServiceCheck2.isSelected()){
+					if(ServiceCheck1.isSelected()){
+						services = services + ", ";
+					}
+					services = services + ServiceCheck2.getText().split(" ")[0];
+				}
+				if(ServiceCheck3.isSelected()){
+					if(ServiceCheck1.isSelected() || ServiceCheck2.isSelected()){
+						services = services + ", ";
+					}
+					services = services + ServiceCheck3.getText().split(" ")[0];
+				}
+				application.setKindOfServices(services);
+				application.setPrice(curPrice);
 				// 회원 아이디를 얻는 법 필요
 				application.setApplicationID("임시 ID");
 
@@ -469,7 +600,7 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 					}
 				}
 				ApplicationList list = ApplicationList.getList();
-				list.printHashTable();
+//				list.printHashTable();
 				ConfirmUI.showMessageDialog(this,"신청이 완료되었습니다","신청 완료");
 				MemberUI MemberWindow = new MemberUI();
 				MemberWindow.setVisible(true);

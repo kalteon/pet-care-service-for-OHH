@@ -96,7 +96,7 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		AppTable.getColumn("신청 ID").setCellRenderer(celAlignCenter);
 		AppTable.getColumn("신청 기간").setCellRenderer(celAlignCenter);
 		AppTable.getColumn("신청 상태").setCellRenderer(celAlignCenter);
-		
+		AppTable.getTableHeader().setReorderingAllowed(false);
 		// 데이터가 화면 넘어갈 시 정렬
 		JScrollPane AppScroll = new JScrollPane(AppTable);
 		add(AppScroll);
@@ -104,7 +104,11 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		AppScroll.getViewport().setBackground(Color.WHITE);
 		
 		AppModel.removeRow(0); // 0번째 행 삭제(빈칸)
-		String a[] = {"1234", "11월 29일", "진행중"}; 
+		/**
+		 *
+		* for 문으로 해시 테이블에 있는 값 추가
+		* */
+		String[] a = {"1234", "11월 29일", "진행중"};
 		AppModel.addRow(a); // 데이터 추가
 		
 		// 뒤로가기 버튼
