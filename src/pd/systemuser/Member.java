@@ -34,7 +34,7 @@ public class Member extends SystemUser{
     public int getNumOfPet() {
         return numOfPet;
     }
-    public Pet getPets(){
+    public ArrayList<Pet> getPets(){
     	return pets;
     }
 }
