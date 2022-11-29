@@ -4,10 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 
-
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.border.Border;
+import javax.swing.JLabel;
 
 /*	 로그인 화면입니다
  * 
@@ -18,14 +19,23 @@ import javax.swing.border.Border;
  *  로 구성됩니다.
  */
 
+
+
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
 	
 	Color c;
 	
+	// 버튼 이미지 & 크기 변환
+	ImageIcon Logoimg = new ImageIcon("././Image/Logo.png");
+	
+	Image img1 = Logoimg.getImage();
+	Image changeImg1 = img1.getScaledInstance(350, 350, Image.SCALE_SMOOTH);
+	ImageIcon Logoicon = new ImageIcon(changeImg1);	
+	
 	public LoginUI() {
 		
-		super("LoginUI");
+		super("로그인 화면");
 		setSize(600, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -34,14 +44,20 @@ public class LoginUI extends JFrame implements ActionListener {
 				
 		getContentPane().setBackground(Color.WHITE); // 배경색 설정
 
-		// 타이틀 추가 예정
-		/*
-		JLabel TitleLabel = new JLabel("로그인 선택");
+		// 타이틀 로고
+		JLabel TitleLogoLabel = new JLabel(Logoicon);
+		TitleLogoLabel.setHorizontalAlignment(JLabel.CENTER);
+		add(TitleLogoLabel);
+		TitleLogoLabel.setBounds(50, 0, 500, 500);
+		
+		// 타이틀
+		JLabel TitleLabel = new JLabel("Pet Care Service for OOH");
 		TitleLabel.setHorizontalAlignment(JLabel.CENTER);
-		TitleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 50));
+		TitleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		add(TitleLabel);
-		TitleLabel.setBounds(50, 50, 500, 70);
-		*/
+		c = new Color(64,126,219);
+		TitleLabel.setBounds(0, 450, 580, 70);
+		TitleLabel.setForeground(c);
 		
 		// 회원 로그인 버튼
 		RoundedButton MemberLoginButton = new RoundedButton("회원 로그인");
