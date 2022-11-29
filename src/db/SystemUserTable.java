@@ -10,7 +10,7 @@ import pd.systemuser.SystemUser;
 public class SystemUserTable
 {
     private static SystemUserTable systemusertable;
-    public Hashtable<String, SystemUser> userHashTable;
+    private Hashtable<String, SystemUser> userHashTable;
     
     private SystemUserTable() {
     	SystemUserDM systemuserDM = new SystemUserDM("filepath");
@@ -39,7 +39,7 @@ public class SystemUserTable
         return systemusertable;
     }
 
-	public Hashtable<String, SystemUser> getUserhashTable() {
+	public Hashtable<String, SystemUser> getUserHashTable() {
 		return userHashTable;
 	}
 

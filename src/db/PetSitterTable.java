@@ -10,7 +10,7 @@ import pd.systemuser.PetSitter;
 public class PetSitterTable
 {
     private static PetSitterTable petsittertable;
-    public Hashtable<String, PetSitter> petsitterHashTable;
+    private Hashtable<String, PetSitter> petsitterHashTable;
     
     private PetSitterTable() {
     	PetSitterDM petsitterDM = new PetSitterDM("filepath");

@@ -3,10 +3,11 @@ package pd.application;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
-import db.PetTable;
+import db.SystemUserTable;
 import db.PetSitterTable;
 import pd.systemuser.Pet;
 import pd.systemuser.PetSitter;
+import pd.systemuser.SystemUser;
 
 public final class ApplicationList {
     private static final ApplicationList list = new ApplicationList();
@@ -76,25 +77,23 @@ public final class ApplicationList {
     }
     
     /*
-     * 돌봄이가 신청정보를 선택해 조회하면 Application에서 userID를 인자로 사용하여 PetTable에 있는 pet ArrayList return
-    */
+     * 돌봄이가 신청정보를 선택해 조회하면 Application에서 userID를 인자로 사용하여 Member를 찾아 Pet ArrayList 반환
+   
     public ArrayList<Pet> getPetArrayList(Application application) {
-    	PetTable pettable = PetTable.getInstance();
-    	return pettable.petHashTable.get(application.getUserID());
+    	SystemUserTable systemuserTable = SystemUserTable.getInstance();
+    	systemuserTable.getUserHashTable().get(application.getUserID()).get;
     }
-    
+     */
     /*
-     * 신청을 수락하면 "결제 대기" 상태로 바꾸고 돌봄ID를 Application에 set
+     * 신청을 수락하면 "결제 대기" 상태로 바꾸고 돌봄ID를 Application에 넣음
      */
     public void accpetApplication(Application application) {
     	application.setState(2);
     	application.setPetsitterID("petsitterID");
     }
-    /*
-     * petsitter정보를 application에 있는 petsitterID를 통해 return
-     */
+    
     public PetSitter getPetSitter(Application application) {
     	PetSitterTable petsittertable = PetSitterTable.getInstance();
-    	return petsittertable.petsitterHashTable.get(application.getPetsitterID());
+    	return petsittertable.getUserhashTable().get(application.getUserID());
     }
 }
