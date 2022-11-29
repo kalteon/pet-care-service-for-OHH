@@ -6,9 +6,10 @@ public class Pet {
     private String petKind;                 // 종류
     private String chronicDisease;          // 지병 여부
     private String kindOfFeed;              // 사료의 종류
+    private String userID;					// 주인을 찾는데 사용할 userID가 필요한것같아서 추가함.
 
-    // init
-    public Pet(String petName, int petAge, String petKind, String chronicDisease, String kindOfFeed){
+	// init
+    public Pet(String petName, int petAge, String petKind, String chronicDisease, String kindOfFeed, String userID){
         setPetName(petName);
         setPetAge(petAge);
         setPetKind(petKind);
@@ -32,8 +33,11 @@ public class Pet {
     public void setKindOfFeed(String kindOfFeed) {
         this.kindOfFeed = kindOfFeed;
     }
+    public String getUserID() {
+		return userID;
+	}
 
-    // getter
+	// getter
     public String getPetName() {
         return petName;
     }
@@ -49,5 +53,8 @@ public class Pet {
     public String getKindOfFeed() {
         return kindOfFeed;
     }
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 
 }

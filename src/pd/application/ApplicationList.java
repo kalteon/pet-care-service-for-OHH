@@ -1,12 +1,17 @@
 package pd.application;
 
 import java.util.Hashtable;
+import java.util.ArrayList;
+
+import db.PetTable;
+import db.PetSitterTable;
+import pd.systemuser.Pet;
+import pd.systemuser.PetSitter;
 
 public final class ApplicationList {
     private static final ApplicationList list = new ApplicationList();
     private final Hashtable<String, Application> htForPresent = new Hashtable<String, Application>();
     private final Hashtable<String, Application> htForPast = new Hashtable<String, Application>();
-
     private ApplicationList() {}
     public static ApplicationList getList(){
         return list;
@@ -68,5 +73,28 @@ public final class ApplicationList {
             System.out.println(key);
         }
         System.out.println("");
+    }
+    
+    /*
+     * 돌봄이가 신청정보를 선택해 조회하면 Application에서 userID를 인자로 사용하여 PetTable에 있는 pet ArrayList return
+    */
+    public ArrayList<Pet> getPetArrayList(Application application) {
+    	PetTable pettable = PetTable.getInstance();
+    	return pettable.petHashTable.get(application.getUserID());
+    }
+    
+    /*
+     * 신청을 수락하면 "결제 대기" 상태로 바꾸고 돌봄ID를 Application에 set
+     */
+    public void accpetApplication(Application application) {
+    	application.setState(2);
+    	application.setPetsitterID("petsitterID");
+    }
+    /*
+     * petsitter정보를 application에 있는 petsitterID를 통해 return
+     */
+    public PetSitter getPetSitter(Application application) {
+    	PetSitterTable petsittertable = PetSitterTable.getInstance();
+    	return petsittertable.petsitterHashTable.get(application.getPetsitterID());
     }
 }

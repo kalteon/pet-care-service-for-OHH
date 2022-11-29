@@ -10,9 +10,11 @@ public class Application {
     private int price;                          // 가격
     private String state;                       // 진행 상황
     static private int idIdx;                   // 신청 ID 생성을 위한 int 변수, 1씩 증가함
+    private String petsitterID;					// 돌봄이의 정보를 열람하려면 회원에게 돌봄이 ID를 전달해야하는데 그 경로로 신청정보가 적합할 것 같아 돌봄이 ID 변수 추가
     String[] stateList = {"신청 대기", "수락 대기", "결제 대기", "완료"};
+	
 
-    public Application(){
+	public Application(){
         this.applicationID = "";
         this.periodOfService = "";
         this.location = "";
@@ -44,6 +46,9 @@ public class Application {
     public void setState(int index) {
         this.state = stateList[index];
     }
+    public void setPetsitterID(String petsitterID) {
+		this.petsitterID = petsitterID;
+	}
 
 // getter
 
@@ -68,6 +73,9 @@ public class Application {
     public String getUserID(){
         return this.applicationID.split("-")[0];
     }
+    public String getPetsitterID() {
+		return petsitterID;
+	}
 
     /**
      * 신청 정보를 신청 목록에 등록한다

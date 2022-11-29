@@ -5,7 +5,7 @@ import db.SystemUserData;
 public class Member extends SystemUser{
     private String enterWay;            // 출입 방법
     private int numOfPet;               // 반려동물 수
-
+    
     // init
     public Member(SystemUserData systemUserData, String enterWay, int numOfPet) {
         super(systemUserData);
