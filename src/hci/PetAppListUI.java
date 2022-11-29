@@ -41,6 +41,7 @@ public class PetAppListUI extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null);
+		setResizable(false);
 		
 		getContentPane().setBackground(Color.WHITE);
 		

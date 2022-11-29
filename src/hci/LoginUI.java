@@ -29,6 +29,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null);
+		setResizable(false);
 				
 		getContentPane().setBackground(Color.WHITE); // 배경색 설정
 

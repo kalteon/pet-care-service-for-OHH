@@ -93,6 +93,7 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null);
+		setResizable(false);
 		
 		getContentPane().setBackground(Color.WHITE);
 		
@@ -464,6 +465,7 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 					}
 					else{
 						ConfirmUI.showMessageDialog(this,"신청이 취소되었습니다","신청 취소");
+						dispose();
 					}
 				}
 				ApplicationList list = ApplicationList.getList();
