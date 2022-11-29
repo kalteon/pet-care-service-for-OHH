@@ -2,6 +2,8 @@ package hci;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -29,12 +31,16 @@ import javax.swing.table.DefaultTableModel;
  */
 
 @SuppressWarnings("serial")
-public class MemAppListUI extends JFrame implements ActionListener{
-
+public class MemAppListUI extends JFrame implements ActionListener, MouseListener{
 	
 	protected JTable AppTable;
 	protected DefaultTableModel AppModel;
 	
+	RoundedButton ReviewButton;
+	RoundedButton PayButton;
+	RoundedButton RemoveButton;
+	
+	int SelectedRow;
 	Color c;
 	
 	// 버튼 이미지 & 크기 변환
@@ -87,7 +93,7 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		AppTable.getTableHeader().setForeground(Color.WHITE);
 		AppTable.getTableHeader().setBackground(c);
 		AppTable.setFont(new Font("맑은 고딕", Font.PLAIN, 13)); // 테이블 내용 폰트 조정
-		
+		AppTable.addMouseListener(this);
 		
 		// 셀 글자 가운데 정렬
 		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
@@ -108,7 +114,7 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		 *
 		* for 문으로 해시 테이블에 있는 값 추가
 		* */
-		String[] a = {"1234", "11월 29일", "진행중"};
+		String[] a = {"1234", "11월 29일", "결제 대기"};
 		AppModel.addRow(a); // 데이터 추가
 		
 		// 뒤로가기 버튼
@@ -123,8 +129,8 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		CancelButton.setFocusPainted(false);
 		CancelButton.addActionListener(this);
 		
-		// 리뷰 버튼
-		RoundedButton ReviewButton = new RoundedButton("리뷰");
+		// 리뷰 버튼 (완료 상태에만 보임)
+		ReviewButton = new RoundedButton("리뷰");
 		add(ReviewButton);
 		c = new Color(64,126,219);
 		ReviewButton.setBackground(c);
@@ -132,10 +138,10 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		ReviewButton.setBounds(450, 680, 100, 50);
 		ReviewButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		ReviewButton.addActionListener(this);
-		ReviewButton.setVisible(true);
+		ReviewButton.setVisible(false);
 		
-		// 결제 버튼 (안보임)
-		RoundedButton PayButton = new RoundedButton("리뷰");
+		// 결제 버튼 (결제 대기시에만 보임)
+		PayButton = new RoundedButton("결제");
 		add(PayButton);
 		c = new Color(64,126,219);
 		PayButton.setBackground(c);
@@ -144,6 +150,19 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		PayButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		PayButton.addActionListener(this);
 		PayButton.setVisible(false);
+		
+		// 삭제 버튼 (수락 대기시에만 보임)
+		RemoveButton = new RoundedButton("삭제");
+		add(RemoveButton);
+		c = new Color(240,62,62);
+		RemoveButton.setBackground(c);
+		RemoveButton.setForeground(Color.WHITE);
+		RemoveButton.setBounds(450, 680, 100, 50);	
+		RemoveButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		RemoveButton.addActionListener(this);	
+		RemoveButton.setVisible(false);
+				
+		
 	}
 	
 	
@@ -160,10 +179,71 @@ public class MemAppListUI extends JFrame implements ActionListener{
 				ReviewUI ReviewWindow = new ReviewUI();
 				ReviewWindow.setVisible(true);
 			}
+		}else if(ActionCmd.equals("결제")) {
+			//ReviewUI ReviewWindow = new ReviewUI();
+			//ReviewWindow.setVisible(true);
+		}else if(ActionCmd.equals("삭제")) {
+			int ans = ConfirmUI.showConfirmDialog(this,"정말 삭제하시겠습니까?","확인 메세지",ConfirmUI.YES_NO_OPTION);
+			if(ans == 0){ // 삭제하기
+				AppModel.removeRow(SelectedRow);
+				/**
+				 * 이 부분에 신청 데이터베이스 정보 삭제하면 됨.
+				 */
+				ReviewButton.setVisible(false);
+				PayButton.setVisible(false);
+				RemoveButton.setVisible(false);
+				ConfirmUI.showMessageDialog(this,"삭제가 완료되었습니다.","확인 메세지");
+			}
 		}
 		else {
 			System.out.println("Unexpected Error");
 			System.exit(0);
 		}
 	}
+	
+	 public void mouseClicked(MouseEvent e) {
+		 SelectedRow = AppTable.getSelectedRow(); // 선택된 Table의 Row값 가져오기
+		 String Status = (String)AppTable.getModel().getValueAt(SelectedRow,2);
+		 if(Status.equals("수락 대기")) {
+			 PayButton.setVisible(false);
+			 ReviewButton.setVisible(false);
+			 RemoveButton.setVisible(true);
+			 PayButton.setBounds(450, 680, 100, 50);
+		 }else if(Status.equals("결제 대기")) {
+			 ReviewButton.setVisible(false);
+			 RemoveButton.setVisible(true);
+			 PayButton.setVisible(true);
+			 PayButton.setBounds(330, 680, 100, 50);
+		 }else if(Status.equals("완료")) {
+			 RemoveButton.setVisible(false);
+			 PayButton.setVisible(false);
+			 ReviewButton.setVisible(true);
+			 PayButton.setBounds(450, 680, 100, 50);
+		 }else {
+			 ReviewButton.setVisible(false);
+			 PayButton.setVisible(false);
+			 RemoveButton.setVisible(false);
+			 PayButton.setBounds(450, 680, 100, 50);
+		 }
+	 }
+
+	 public void mousePressed(MouseEvent e) {
+	  // TODO Auto-generated method stub
+	  
+	 }
+
+	 public void mouseReleased(MouseEvent e) {
+	  // TODO Auto-generated method stub
+	  
+	 }
+
+	 public void mouseEntered(MouseEvent e) {
+	  // TODO Auto-generated method stub
+	  
+	 }
+
+	 public void mouseExited(MouseEvent e) {
+	  // TODO Auto-generated method stub
+	  
+	 }
 }

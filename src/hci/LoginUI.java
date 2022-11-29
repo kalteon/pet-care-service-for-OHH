@@ -87,7 +87,6 @@ public class LoginUI extends JFrame implements ActionListener {
 		RegisterButton.setForeground(Color.WHITE); 
 		RegisterButton.setBounds(30, 610, 530, 50); 
 		RegisterButton.setFont(new Font("맑은 고딕", Font.BOLD, 20)); 
-		RegisterButton.addActionListener(this);
 		
 		// 종료 버튼
 		RoundedButton ExitButton = new RoundedButton("종료하기");

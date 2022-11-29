@@ -2,6 +2,8 @@ package hci;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -13,10 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
-public class PetAppListUI extends JFrame implements ActionListener{
+public class PetAppListUI extends JFrame implements ActionListener, MouseListener{
 
 	protected JTable AppTable;
 	protected DefaultTableModel AppModel;
@@ -34,6 +37,9 @@ public class PetAppListUI extends JFrame implements ActionListener{
 	Image changeImg2 = img2.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 	ImageIcon CancelButtonicon2 = new ImageIcon(changeImg2);
 	
+	int SelectedRow;
+	
+	RoundedButton AppCancelButton;
 	
 	public PetAppListUI() {
 		super("PetAppListUI");
@@ -58,7 +64,7 @@ public class PetAppListUI extends JFrame implements ActionListener{
 		JSepStart.setBounds(0, 170, 600, 70);	
 		
 		// 신청 목록
-		String header[] = {"A", "B", "C"};
+		String header[] = {"신청 ID", "신청 기간", "신청 상태"};
 		String contents[][] = {{"","",""}};
 		
 		AppModel = new DefaultTableModel(contents, header) {
@@ -71,7 +77,24 @@ public class PetAppListUI extends JFrame implements ActionListener{
 		AppTable.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		AppTable.getTableHeader().setForeground(Color.WHITE);
 		AppTable.getTableHeader().setBackground(c);
+		AppTable.setFont(new Font("맑은 고딕", Font.PLAIN, 13)); // 테이블 내용 폰트 조정
 		
+		
+		// 셀 글자 가운데 정렬
+		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
+		celAlignCenter.setHorizontalAlignment(JLabel.CENTER);
+				
+		AppTable.getColumn("신청 ID").setCellRenderer(celAlignCenter);
+		AppTable.getColumn("신청 기간").setCellRenderer(celAlignCenter);
+		AppTable.getColumn("신청 상태").setCellRenderer(celAlignCenter);
+		AppTable.getTableHeader().setReorderingAllowed(false);
+		AppTable.addMouseListener(this);
+		
+		AppModel.removeRow(0); // 0번째 행 삭제(빈칸)
+		String a[] = {"1234", "11월 29일", "진행중"}; 
+		AppModel.addRow(a); // 데이터 추가
+		
+		// 데이터가 화면 넘어갈 시 정렬
 		JScrollPane AppScroll = new JScrollPane(AppTable);
 		add(AppScroll);
 		AppScroll.setBounds(20, 190, 540, 480);
@@ -88,7 +111,7 @@ public class PetAppListUI extends JFrame implements ActionListener{
 		CancelButton.setFocusPainted(false);
 		CancelButton.addActionListener(this);
 		
-		RoundedButton AppCancelButton = new RoundedButton("신청 취소");
+		AppCancelButton = new RoundedButton("신청 취소");
 		add(AppCancelButton);
 		c = new Color(240,62,62);
 		AppCancelButton.setBackground(c);
@@ -96,7 +119,7 @@ public class PetAppListUI extends JFrame implements ActionListener{
 		AppCancelButton.setBounds(450, 680, 100, 50);
 		AppCancelButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		AppCancelButton.addActionListener(this);
-		
+		AppCancelButton.setVisible(false);
 		
 	}
 	public void actionPerformed(ActionEvent e) {
@@ -109,7 +132,9 @@ public class PetAppListUI extends JFrame implements ActionListener{
 		else if(ActionCmd.equals("신청 취소")) {
 			int ans = ConfirmUI.showConfirmDialog(this,"정말 신청을 취소하시겠습니까?","확인 메세지",ConfirmUI.YES_NO_OPTION);
 			if(ans == 0){ // 신청 취소 수락
+				AppModel.removeRow(SelectedRow);
 				ConfirmUI.showMessageDialog(this,"신청이 취소되었습니다","신청 취소 완료");
+				AppCancelButton.setVisible(false);
 			}
 		}
 		else {
@@ -117,4 +142,29 @@ public class PetAppListUI extends JFrame implements ActionListener{
 			System.exit(0);
 		}
 	}
+	
+	public void mouseClicked(MouseEvent e) {
+		SelectedRow = AppTable.getSelectedRow(); // 선택된 Table의 Row값 가져오기
+		AppCancelButton.setVisible(true);
+	 }
+
+	 public void mousePressed(MouseEvent e) {
+	  // TODO Auto-generated method stub
+	  
+	 }
+
+	 public void mouseReleased(MouseEvent e) {
+	  // TODO Auto-generated method stub
+	  
+	 }
+
+	 public void mouseEntered(MouseEvent e) {
+	  // TODO Auto-generated method stub
+	  
+	 }
+
+	 public void mouseExited(MouseEvent e) {
+	  // TODO Auto-generated method stub
+	  
+	 }
 }
