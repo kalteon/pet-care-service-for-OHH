@@ -87,9 +87,9 @@ public final class ApplicationList {
     /*
      * 신청을 수락하면 "결제 대기" 상태로 바꾸고 돌봄ID를 Application에 넣음
      */
-    public void accpetApplication(Application application) {
+    public void acceptApplication(Application application) {
     	application.setState(2);
-    	application.setPetsitterID("petsitterID");
+    	application.setPetSitterID("petSitterID");
     }
     
     public PetSitter getPetSitter(Application application) {

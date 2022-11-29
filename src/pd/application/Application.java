@@ -6,12 +6,12 @@ public class Application {
     private String applicationID;               // 신청 ID        형태: "userId-idIdx"
     private String periodOfService;             // 이용 시간
     private String location;                    // 위치
-    private String kindOfServices;            // 신청 서비스 종류
+    private String kindOfServices;              // 신청 서비스 종류
     private int price;                          // 가격
     private String state;                       // 진행 상황
     static private int idIdx;                   // 신청 ID 생성을 위한 int 변수, 1씩 증가함
-    private String petsitterID;					// 돌봄이의 정보를 열람하려면 회원에게 돌봄이 ID를 전달해야하는데 그 경로로 신청정보가 적합할 것 같아 돌봄이 ID 변수 추가
-    String[] stateList = {"신청 대기", "수락 대기", "결제 대기", "완료"};
+    private String petSitterID;					// 돌봄이의 정보를 열람하려면 회원에게 돌봄이 ID를 전달해야하는데 그 경로로 신청정보가 적합할 것 같아 돌봄이 ID 변수 추가
+    String[] stateList = {"신청 대기", "수락 대기", "결제 대기", "진행중", "완료"};
 	
 
 	public Application(){
@@ -46,8 +46,8 @@ public class Application {
     public void setState(int index) {
         this.state = stateList[index];
     }
-    public void setPetsitterID(String petsitterID) {
-		this.petsitterID = petsitterID;
+    public void setPetSitterID(String petSitterID) {
+		this.petSitterID = petSitterID;
 	}
 
 // getter
@@ -73,8 +73,8 @@ public class Application {
     public String getUserID(){
         return this.applicationID.split("-")[0];
     }
-    public String getPetsitterID() {
-		return petsitterID;
+    public String getPetSitterID() {
+		return petSitterID;
 	}
 
     /**
