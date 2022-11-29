@@ -51,6 +51,7 @@ public class MemberUI extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null);
+		setResizable(false);
 		
 		getContentPane().setBackground(Color.WHITE);
 		

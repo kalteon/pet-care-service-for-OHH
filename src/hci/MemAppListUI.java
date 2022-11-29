@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /*	  회원 신청 내역 확인화면입니다.
@@ -55,6 +56,7 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setLayout(null);
+		setResizable(false);
 		
 		getContentPane().setBackground(Color.WHITE);
 		
@@ -71,7 +73,7 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		JSepStart.setBounds(0, 170, 600, 70);			
 		
 		// 신청 목록
-		String header[] = {"A", "B", "C"};
+		String header[] = {"신청 ID", "신청 기간", "신청 상태"};
 		String contents[][] = {{"","",""}};
 		
 		AppModel = new DefaultTableModel(contents, header) {
@@ -81,14 +83,29 @@ public class MemAppListUI extends JFrame implements ActionListener{
 		};
 		AppTable = new JTable(AppModel);
 		c = new Color(64,126,219);
-		AppTable.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		AppTable.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 15)); // 테이블 헤더 폰트 조정
 		AppTable.getTableHeader().setForeground(Color.WHITE);
 		AppTable.getTableHeader().setBackground(c);
+		AppTable.setFont(new Font("맑은 고딕", Font.PLAIN, 13)); // 테이블 내용 폰트 조정
 		
+		
+		// 셀 글자 가운데 정렬
+		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
+		celAlignCenter.setHorizontalAlignment(JLabel.CENTER);
+		
+		AppTable.getColumn("신청 ID").setCellRenderer(celAlignCenter);
+		AppTable.getColumn("신청 기간").setCellRenderer(celAlignCenter);
+		AppTable.getColumn("신청 상태").setCellRenderer(celAlignCenter);
+		
+		// 데이터가 화면 넘어갈 시 정렬
 		JScrollPane AppScroll = new JScrollPane(AppTable);
 		add(AppScroll);
 		AppScroll.setBounds(20, 190, 540, 480);
 		AppScroll.getViewport().setBackground(Color.WHITE);
+		
+		AppModel.removeRow(0); // 0번째 행 삭제(빈칸)
+		String a[] = {"1234", "11월 29일", "진행중"}; 
+		AppModel.addRow(a); // 데이터 추가
 		
 		// 뒤로가기 버튼
 		JButton CancelButton = new JButton(CancelButtonicon1);
