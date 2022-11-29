@@ -7,6 +7,7 @@ import java.awt.Font;
 
 
 import javax.swing.JFrame;
+import javax.swing.border.Border;
 
 /*	 로그인 화면입니다
  * 
@@ -48,7 +49,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		c = new Color(64,126,219);
 		MemberLoginButton.setBackground(c); // 버튼 색깔
 		MemberLoginButton.setForeground(Color.WHITE); // 버튼 글자 색깔
-		MemberLoginButton.setBounds(30, 550, 530, 50); // 위치 설정 (x,y,width,height)
+		MemberLoginButton.setBounds(30, 550, 260, 50); // 위치 설정 (x,y,width,height)
 		MemberLoginButton.setFont(new Font("맑은 고딕", Font.BOLD, 20)); // 글꼴 설정
 		MemberLoginButton.addActionListener(this); // 이벤트 처리 등록
 		
@@ -58,9 +59,19 @@ public class LoginUI extends JFrame implements ActionListener {
 		c = new Color(64,126,219);
 		PetSitterLoginButton.setBackground(c);
 		PetSitterLoginButton.setForeground(Color.WHITE);
-		PetSitterLoginButton.setBounds(30, 610, 530, 50);
+		PetSitterLoginButton.setBounds(300, 550, 260, 50);
 		PetSitterLoginButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		PetSitterLoginButton.addActionListener(this);
+		
+		// 회원가입 버튼 (더미 버튼)
+		RoundedButton RegisterButton = new RoundedButton("회원가입");
+		add(RegisterButton);
+		c = new Color(107,158,239);
+		RegisterButton.setBackground(c); 
+		RegisterButton.setForeground(Color.WHITE); 
+		RegisterButton.setBounds(30, 610, 530, 50); 
+		RegisterButton.setFont(new Font("맑은 고딕", Font.BOLD, 20)); 
+		RegisterButton.addActionListener(this);
 		
 		// 종료 버튼
 		RoundedButton ExitButton = new RoundedButton("종료하기");
