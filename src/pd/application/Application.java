@@ -7,7 +7,7 @@ public class Application {
     private String periodOfService;             // 이용 시간
     private String location;                    // 위치
     private String kindOfServices;              // 신청 서비스 종류
-    private int price;                          // 가격
+    private String price;                          // 가격
     private String state;                       // 진행 상황
     static private int idIdx;                   // 신청 ID 생성을 위한 int 변수, 1씩 증가함
     private String petSitterID;					// 돌봄이의 정보를 열람하려면 회원에게 돌봄이 ID를 전달해야하는데 그 경로로 신청정보가 적합할 것 같아 돌봄이 ID 변수 추가
@@ -19,7 +19,7 @@ public class Application {
         this.periodOfService = "";
         this.location = "";
         this.kindOfServices = "";
-        this.price = 0;
+        this.price = "";
         this.state = stateList[0];
     }
     // setter
@@ -40,7 +40,7 @@ public class Application {
     public void setKindOfServices(String kindOfServices) {
         this.kindOfServices = kindOfServices;
     }
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
     public void setState(int index) {
@@ -64,7 +64,7 @@ public class Application {
     public String getKindOfServices() {
         return kindOfServices;
     }
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
     public String getState() {
