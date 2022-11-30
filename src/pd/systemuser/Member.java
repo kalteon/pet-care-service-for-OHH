@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Member extends SystemUser{
     private String enterWay;            // 출입 방법
     private int numOfPet;               // 반려동물 수
-    private ArrayList<Pet> pets = new ArrayList<>();
+    private ArrayList<Pet> pets;
     
     // init
     public Member(String name, String birth, int age, String address, String cellPhoneContact, String email,
@@ -14,6 +14,7 @@ public class Member extends SystemUser{
         super(name, birth, age, address, cellPhoneContact, email, loginID, password, userID);
         setEnterWay(enterWay);
         setNumOfPet(numOfPet);
+        pets = new ArrayList<>();
     }
 
     public void addPet(Pet pet) {
