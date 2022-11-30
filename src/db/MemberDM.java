@@ -50,10 +50,8 @@ public class MemberDM {
 			return temp;
 		} catch (ClassNotFoundException e) {
 			System.out.println("file read false");
-			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("file read false");
-			e.printStackTrace();
 		}
 		return null;
 	}
