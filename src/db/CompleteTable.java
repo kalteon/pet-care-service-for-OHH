@@ -15,7 +15,7 @@ public class CompleteTable
     private CompleteDM completeDM;
     
     private CompleteTable() {
-    	completeDM = new CompleteDM("CompleteDM");
+    	completeDM = new CompleteDM("CompleteTable");
     	completehashtable = new Hashtable<>();
     }
     

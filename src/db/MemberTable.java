@@ -15,7 +15,7 @@ public class MemberTable
     private MemberDM memberDM;
     
     private MemberTable() {
-    	memberDM = new MemberDM("MemberDM");
+    	memberDM = new MemberDM("MemberTable");
     }
     
     public static MemberTable getInstance()

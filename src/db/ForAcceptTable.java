@@ -15,7 +15,7 @@ public class ForAcceptTable
     private ForAcceptDM foracceptDM;
     
     private ForAcceptTable() {
-    	foracceptDM = new ForAcceptDM("ForAcceptDM");
+    	foracceptDM = new ForAcceptDM("ForAcceptTable");
     }
     
     public static ForAcceptTable getInstance()

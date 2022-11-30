@@ -15,7 +15,7 @@ public class ForPaymentTable
     private ForPaymentDM forpaymentDM;
     
     private ForPaymentTable() {
-    	forpaymentDM = new ForPaymentDM("ForPaymentDM");
+    	forpaymentDM = new ForPaymentDM("ForPaymentTable");
     }
     
     public static ForPaymentTable getInstance()

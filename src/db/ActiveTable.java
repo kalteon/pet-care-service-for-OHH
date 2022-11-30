@@ -15,7 +15,7 @@ public class ActiveTable
     private ActiveDM activeDM;
     
     private ActiveTable() {
-    	activeDM = new ActiveDM("ActiveDM");
+    	activeDM = new ActiveDM("ActiveTable");
     }
     
     public static ActiveTable getInstance()
