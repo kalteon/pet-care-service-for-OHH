@@ -44,14 +44,14 @@ public class ForPaymentTable
     //getter 파일이 없으면 null 반환
 	public Hashtable<String, Application> getForPaymentHashTable() {
 		forpaymenthashtable = forpaymentDM.readObjectData();
+		if(forpaymenthashtable == null)
+			forpaymenthashtable = new Hashtable<>();
    		return forpaymenthashtable;
 	}
 	
 	//ForPayment Table에 추가
 	public void putForPaymentHashTable(String applicationID, Application application) {
 		forpaymenthashtable = forpaymentDM.readObjectData();
-		if(forpaymenthashtable == null)
-			forpaymenthashtable = new Hashtable<>();
 		forpaymenthashtable.put(applicationID, application);
 		forpaymentDM.deletObjectData();
 		forpaymentDM.writeObjectData(forpaymenthashtable);

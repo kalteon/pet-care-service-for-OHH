@@ -44,14 +44,14 @@ public class ForAcceptTable
     //getter 파일이 없으면 null이 반환
 	public Hashtable<String, Application> getForAcceptHashTable() {
 		foraccepthashtable = foracceptDM.readObjectData();
+		if(foraccepthashtable == null)
+			foraccepthashtable = new Hashtable<>();
    		return foraccepthashtable;
 	}
 	
 	//ForAcceptTable에 추가
 	public void putForAcceptHashTable(String applicationID, Application application) {
 		foraccepthashtable = foracceptDM.readObjectData();
-		if(foraccepthashtable == null)
-			foraccepthashtable = new Hashtable<>();
 		foraccepthashtable.put(applicationID, application);
 		foracceptDM.deletObjectData();
 		foracceptDM.writeObjectData(foraccepthashtable);
