@@ -15,7 +15,7 @@ public class PetSitterTable
     private PetSitterDM petsitterDM;
     
     private PetSitterTable() {
-    	petsitterDM = new PetSitterDM("PetSitter");
+    	petsitterDM = new PetSitterDM("PetSitterDM");
     }
     
     public static PetSitterTable getInstance()
