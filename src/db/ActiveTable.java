@@ -43,14 +43,14 @@ public class ActiveTable
     //getter 파일이 없으면 null 반환
 	public Hashtable<String, Application> getActiveHashTable() {
 		activehashtable = activeDM.readObjectData();
+		if(activehashtable == null)
+			activehashtable = new Hashtable<>();
    		return activehashtable;
 	}
 	
 	//ActiveTable에 추가
 	public void putActiveHashTable(String applicationID, Application application) {
 		activehashtable = activeDM.readObjectData();
-		if(activehashtable == null)
-			activehashtable = new Hashtable<>();
 		activehashtable.put(applicationID, application);
 		activeDM.deletObjectData();
 		activeDM.writeObjectData(activehashtable);

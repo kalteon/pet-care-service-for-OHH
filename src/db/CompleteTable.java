@@ -34,14 +34,13 @@ public class CompleteTable
     //getter 파일이 없으면 null 반환
 	public Hashtable<String, Application> getCompleteHashTable() {
 		completehashtable = completeDM.readObjectData();
+		if(completehashtable == null)
+			completehashtable = new Hashtable<>();
    		return completehashtable;
 	}
-	
 	//Complete Table에 추가
 	public void putCompleteHashTable(String applicationID, Application application) {
 		completehashtable = completeDM.readObjectData();
-		if(completehashtable == null)
-			completehashtable = new Hashtable<>();
 		completehashtable.put(applicationID, application);
 		completeDM.deletObjectData();
 		completeDM.writeObjectData(completehashtable);

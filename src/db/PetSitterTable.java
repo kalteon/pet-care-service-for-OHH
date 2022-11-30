@@ -33,14 +33,14 @@ public class PetSitterTable
     //getter
 	public Hashtable<String, PetSitter> getPetSitterHashTable() {
 		petsitterhashtable = petsitterDM.readObjectData();
+		if(petsitterhashtable == null)
+			petsitterhashtable = new Hashtable<>();
 		return petsitterhashtable;
 	}
 
 	//돌봄이 추가
 	public void putPetSitterHashTable(String petsitterID, PetSitter petsitter) {
 		petsitterhashtable = petsitterDM.readObjectData();
-		if(petsitterhashtable == null)
-			petsitterhashtable = new Hashtable<>();
 		petsitterhashtable.put(petsitterID, petsitter);
 		petsitterDM.deletObjectData();
 		petsitterDM.writeObjectData(petsitterhashtable);

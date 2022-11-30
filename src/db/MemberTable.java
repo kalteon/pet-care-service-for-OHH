@@ -33,14 +33,14 @@ public class MemberTable
     //getter
 	public Hashtable<String, Member> getMemberHashTable() {
 		memberhashtable = memberDM.readObjectData();
+		if(memberhashtable == null)
+			memberhashtable = new Hashtable<>();
    		return memberhashtable;
 	}
 	
 	//멤버 추가
 	public void putMemberHashTable(String memberID, Member member) {
 		memberhashtable = memberDM.readObjectData();
-		if(memberhashtable == null)
-			memberhashtable = new Hashtable<>();
 		memberhashtable.put(memberID, member);
 		memberDM.deletObjectData();
 		memberDM.writeObjectData(memberhashtable);
