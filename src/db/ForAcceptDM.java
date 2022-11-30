@@ -10,19 +10,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import pd.systemuser.Member;
+import pd.application.Application;
 
-/* Member Hashtable 객체를 파일에 읽고 쓰는 클래스
- * Member Hashtable를 파일에 저장
- * 정보 수정하려면 파일에서 Member Hashtable을 가지고 와서 수정하고 기존 파일을 삭제하고 새로만들어야 함
+/* ForAccept(수락대기) Hashtable 객체를 파일에 읽고 쓰는 클래스
+ * ForAccept Hashtable을 파일에 저장
  * 직렬화는 저장하려는 객체의 클래스에 Serializable가 implements되어 있어야함.
  */
-public class MemberDM {
+public class ForAcceptDM {
 	private File file;   				//파일 class
 	private ObjectOutputStream write; //파일에 객체의 정보를 입력하는 스트림
 	private ObjectInputStream read; //파일에 저장되어있는 객체를 읽어오는 스트림
 	
-	public MemberDM(String filePath) {
+	public ForAcceptDM(String filePath) {
 		file = new File(filePath);
 		String fileName = file.getName();
 		try {
@@ -36,7 +35,7 @@ public class MemberDM {
 			e.printStackTrace();
 		}
 	}
-	public void writeObjectData(Hashtable<String, Member> a) {
+	public void writeObjectData(Hashtable<String, Application> a) {
 		try {
 			write.writeObject(a);
 		} catch (IOException e) {
@@ -44,14 +43,16 @@ public class MemberDM {
 			e.printStackTrace();
 		}
 	}
-	public Hashtable<String, Member> readObjectData() {
+	public Hashtable<String, Application> readObjectData() {
 		try {
-			Hashtable<String, Member> temp = (Hashtable<String, Member>)read.readObject();
+			Hashtable<String, Application> temp = (Hashtable<String, Application>)read.readObject();
 			return temp;
 		} catch (ClassNotFoundException e) {
 			System.out.println("file read false");
+			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("file read false");
+			e.printStackTrace();
 		}
 		return null;
 	}

@@ -43,7 +43,7 @@ public class PetSitterDM {
 			e.printStackTrace();
 		}
 	}
-	public Hashtable<String, PetSitter> readObjecfData() {
+	public Hashtable<String, PetSitter> readObjectData() {
 		try {
 			Hashtable<String, PetSitter> temp = (Hashtable<String, PetSitter>)read.readObject();
 			return temp;

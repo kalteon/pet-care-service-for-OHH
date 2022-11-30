@@ -16,7 +16,6 @@ public class PetSitterTable
     
     private PetSitterTable() {
     	petsitterDM = new PetSitterDM("PetSitter");
-    	petsitterhashtable = new Hashtable<>();
     }
     
     public static PetSitterTable getInstance()
@@ -32,15 +31,19 @@ public class PetSitterTable
     }
 
     //getter
-	public Hashtable<String, PetSitter> getpetsitterHashTable() {
-		petsitterhashtable = petsitterDM.readObjecfData();
+	public Hashtable<String, PetSitter> getPetSitterHashTable() {
+		petsitterhashtable = petsitterDM.readObjectData();
 		return petsitterhashtable;
 	}
 
-	//setter
-	public void putpetsitterHashTable(String petsitterID, PetSitter petsitter) {
+	//돌봄이 추가
+	public void putPetSitterHashTable(String petsitterID, PetSitter petsitter) {
+		petsitterhashtable = petsitterDM.readObjectData();
+		if(petsitterhashtable == null)
+			petsitterhashtable = new Hashtable<>();
 		petsitterhashtable.put(petsitterID, petsitter);
 		petsitterDM.deletObjectData();
 		petsitterDM.writeObjectData(petsitterhashtable);
 	}
+
 }

@@ -1,8 +1,8 @@
 package pd.systemuser;
 
-import db.SystemUserData;
+import java.io.Serializable;
 
-public class SystemUser {
+public class SystemUser  implements Serializable{
     // 개인 정보
     protected String name;                  // 이름
     protected String birth;                 // 생년월일
@@ -14,20 +14,20 @@ public class SystemUser {
     // 로그인 정보
     protected String loginID;               // 로그인 ID
     protected String password;              // 로그인 비밀번호
-
     protected String userID;                // 회원 ID
 
     // init
-    public SystemUser(SystemUserData systemUserData){
-        setName(systemUserData.getName());
-        setBirth(systemUserData.getBirth());
-        setAge(systemUserData.getAge());
-        setAddress(systemUserData.getAddress());
-        setCellPhoneContact(systemUserData.getCellPhoneContact());
-        setEmail(systemUserData.getEmail());
-        setLoginID(systemUserData.getLoginID());
-        setPassword(systemUserData.getPassword());
-        setID(systemUserData.getUserID());
+    public SystemUser(String name, String birth, int age, String address, String cellPhoneContact, String email,
+    		String loginID, String password, String userID){
+    	this.name = name;
+    	this.birth = birth;
+    	this.age = age;
+    	this.address = address;
+    	this.cellPhoneContact = cellPhoneContact;
+    	this.email = email;
+    	this.loginID = loginID;
+    	this.password = password;
+    	this.userID = userID;
     }
 
     // setter

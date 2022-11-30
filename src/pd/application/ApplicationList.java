@@ -78,7 +78,7 @@ public final class ApplicationList {
      // 돌봄이가 신청정보를 선택해 조회하면 Application에서 userID를 인자로 사용하여 Member를 찾아 Pet ArrayList 반환
     public ArrayList<Pet> getPetArrayList(Application application) {
     	MemberTable membertable = MemberTable.getInstance();
-    	return membertable.getmemberHashTable().get(application.getUserID()).getPets();
+    	return membertable.getMemberHashTable().get(application.getUserID()).getPets();
     }
     /*
      * 신청을 수락하면 "결제 대기" 상태로 바꾸고 돌봄ID를 Application에 넣음
@@ -90,6 +90,6 @@ public final class ApplicationList {
     
     public PetSitter getPetSitter(Application application) {
     	PetSitterTable petsittertable = PetSitterTable.getInstance();
-    	return petsittertable.getpetsitterHashTable().get(application.getUserID());
+    	return petsittertable.getPetSitterHashTable().get(application.getUserID());
     }
 }
