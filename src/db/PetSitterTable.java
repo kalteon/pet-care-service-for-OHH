@@ -1,6 +1,8 @@
 package db;
 
 import java.util.Hashtable;
+
+import pd.systemuser.Member;
 import pd.systemuser.PetSitter;
 
 /*
@@ -10,20 +12,12 @@ import pd.systemuser.PetSitter;
 public class PetSitterTable
 {
     private static PetSitterTable petsittertable;
-    private Hashtable<String, PetSitter> petsitterHashTable;
+    private static Hashtable<String, PetSitter> petsitterhashtable;
+    private PetSitterDM petsitterDM;
     
     private PetSitterTable() {
-    	PetSitterDM petsitterDM = new PetSitterDM("filepath");
-    	petsitterHashTable = new Hashtable<>();
-    	while(true) {
-    		PetSitter petsitter;
-			try {
-				petsitter = petsitterDM.readObjecfData();
-			} catch (Exception e) {
-				break;
-			}
-			petsitterHashTable.put(petsitter.getUserID(), petsitter);
-    	}
+    	petsitterDM = new PetSitterDM("PetSitter");
+    	petsitterhashtable = new Hashtable<>();
     }
     
     public static PetSitterTable getInstance()
@@ -35,12 +29,19 @@ public class PetSitterTable
                 petsittertable = new PetSitterTable();
             }
         }
-        
         return petsittertable;
     }
 
-	public Hashtable<String, PetSitter> getUserhashTable() {
-		return petsitterHashTable;
+    //getter
+	public Hashtable<String, PetSitter> getpetsitterHashTable() {
+		petsitterhashtable = petsitterDM.readObjecfData();
+		return petsitterhashtable;
 	}
 
+	//setter
+	public void putpetsitterHashTable(String petsitterID, PetSitter petsitter) {
+		petsitterhashtable.put(petsitterID, petsitter);
+		petsitterDM.deletObjectData();
+		petsitterDM.writeObjectData(petsitterhashtable);
+	}
 }
