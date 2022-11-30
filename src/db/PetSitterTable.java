@@ -2,12 +2,11 @@ package db;
 
 import java.util.Hashtable;
 
-import pd.systemuser.Member;
 import pd.systemuser.PetSitter;
 
 /*
- * PetSitter 데이터를 용이하게 다루려면 hashmap이 필요할 것 같아서 추가했습니다.
- * PetSitterDM을 통해서 얻은 petsitter 데이터를 하나의 hashtable에 묶어두는 싱글톤 클래스입니다.
+ * PetSitterDM으로 불러온 PetSitter Hashtable을 불러와서 보관하는 고유한 싱글톤 클래스.
+ * PetSitterTable petsittertable = PetSitterTable.getInstance() 형태로 불러오면 어디서든 같은 내용의 PetSitterTable 사용가능.
  */
 public class PetSitterTable
 {
