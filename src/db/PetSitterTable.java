@@ -33,7 +33,7 @@ public class PetSitterTable
 
     //getter
 	public Hashtable<String, PetSitter> getpetsitterHashTable() {
-		petsitterhashtable = petsitterDM.readObjecfData();
+		petsitterhashtable = petsitterDM.readObjectData();
 		return petsitterhashtable;
 	}
 
