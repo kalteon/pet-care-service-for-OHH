@@ -12,9 +12,9 @@ import java.io.ObjectOutputStream;
 
 import pd.systemuser.Member;
 
-/* Member 객체를 파일에 읽고 쓰는 클래스
- * Member 객체 자체를 파일에 저장
- * 정보 수정하려면 파일에서 Member 객체를 가지고 와서 수정하고 기존 파일을 삭제하고 새로만들어야하 함
+/* Member Hashtable 객체를 파일에 읽고 쓰는 클래스
+ * Member Hashtable를 파일에 저장
+ * 정보 수정하려면 파일에서 Member Hashtable을 가지고 와서 수정하고 기존 파일을 삭제하고 새로만들어야 함
  * 직렬화는 저장하려는 객체의 클래스에 Serializable가 implements되어 있어야함.
  */
 public class MemberDM {
