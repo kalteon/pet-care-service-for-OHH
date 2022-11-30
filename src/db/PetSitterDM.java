@@ -7,12 +7,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Hashtable;
 
 import pd.systemuser.PetSitter;
 
-/* PetSitter 객체를 파일에 읽고 쓰는 클래스
- * PetSitter 객체 자체를 파일에 저장
- * 정보 수정하려면 파일에서 PetSitter 객체를 가지고 와서 수정하고 기존 파일을 삭제하고 새로만들어야 함
+/* PetSitter Hashtable 객체를 파일에 읽고 쓰는 클래스
+ * PetSitter Hashtable를 파일에 저장
+ * 정보 수정하려면 파일에서 PetSitter Hashtable을 가지고 와서 수정하고 기존 파일을 삭제하고 새로만들어야 함
  * 직렬화는 저장하려는 객체의 클래스에 Serializable가 implements되어 있어야함.
  */
 public class PetSitterDM {
@@ -34,7 +35,7 @@ public class PetSitterDM {
 			e.printStackTrace();
 		}
 	}
-	public void writeObjectData(PetSitter a) {
+	public void writeObjectData(Hashtable<String, PetSitter> a) {
 		try {
 			write.writeObject(a);
 		} catch (IOException e) {
@@ -42,9 +43,9 @@ public class PetSitterDM {
 			e.printStackTrace();
 		}
 	}
-	public PetSitter readObjecfData() {
+	public Hashtable<String, PetSitter> readObjecfData() {
 		try {
-			PetSitter temp = (PetSitter)read.readObject();
+			Hashtable<String, PetSitter> temp = (Hashtable<String, PetSitter>)read.readObject();
 			return temp;
 		} catch (ClassNotFoundException e) {
 			System.out.print("file read false");

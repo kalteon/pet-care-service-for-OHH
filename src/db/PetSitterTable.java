@@ -1,29 +1,22 @@
 package db;
 
 import java.util.Hashtable;
+
 import pd.systemuser.PetSitter;
 
 /*
- * PetSitter 데이터를 용이하게 다루려면 hashmap이 필요할 것 같아서 추가했습니다.
- * PetSitterDM을 통해서 얻은 petsitter 데이터를 하나의 hashtable에 묶어두는 싱글톤 클래스입니다.
+ * PetSitterDM으로 불러온 PetSitter Hashtable을 불러와서 보관하는 고유한 싱글톤 클래스.
+ * PetSitterTable petsittertable = PetSitterTable.getInstance() 형태로 불러오면 어디서든 같은 내용의 PetSitterTable 사용가능.
  */
 public class PetSitterTable
 {
     private static PetSitterTable petsittertable;
-    private Hashtable<String, PetSitter> petsitterHashTable;
+    private static Hashtable<String, PetSitter> petsitterhashtable;
+    private PetSitterDM petsitterDM;
     
     private PetSitterTable() {
-    	PetSitterDM petsitterDM = new PetSitterDM("filepath");
-    	petsitterHashTable = new Hashtable<>();
-    	while(true) {
-    		PetSitter petsitter;
-			try {
-				petsitter = petsitterDM.readObjecfData();
-			} catch (Exception e) {
-				break;
-			}
-			petsitterHashTable.put(petsitter.getUserID(), petsitter);
-    	}
+    	petsitterDM = new PetSitterDM("PetSitter");
+    	petsitterhashtable = new Hashtable<>();
     }
     
     public static PetSitterTable getInstance()
@@ -35,12 +28,19 @@ public class PetSitterTable
                 petsittertable = new PetSitterTable();
             }
         }
-        
         return petsittertable;
     }
 
-	public Hashtable<String, PetSitter> getUserhashTable() {
-		return petsitterHashTable;
+    //getter
+	public Hashtable<String, PetSitter> getpetsitterHashTable() {
+		petsitterhashtable = petsitterDM.readObjecfData();
+		return petsitterhashtable;
 	}
 
+	//setter
+	public void putpetsitterHashTable(String petsitterID, PetSitter petsitter) {
+		petsitterhashtable.put(petsitterID, petsitter);
+		petsitterDM.deletObjectData();
+		petsitterDM.writeObjectData(petsitterhashtable);
+	}
 }
