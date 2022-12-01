@@ -3,8 +3,7 @@ package pd.application;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
-import db.PetSitterTable;
-import db.MemberTable;
+import db.*;
 import pd.systemuser.PetSitter;
 import pd.systemuser.Pet;
 
@@ -13,6 +12,16 @@ public final class ApplicationList {
     private final Hashtable<String, Application> htForPresent = new Hashtable<String, Application>();
     private final Hashtable<String, Application> htForPast = new Hashtable<String, Application>();
     private ApplicationList() {}
+
+    private final Hashtable<String, Application> forAcceptTable =
+            ForAcceptTable.getInstance().getForAcceptHashTable();           // 수락 대기 테이블
+    private final Hashtable<String, Application> forPaymentTable =
+            ForPaymentTable.getInstance().getForPaymentHashTable();         // 결제 대기 테이블
+    private final Hashtable<String, Application> forActiveTable =
+            ActiveTable.getInstance().getActiveHashTable();                 // 진행중 테이블
+    private final Hashtable<String, Application> forCompleteTable =
+            CompleteTable.getInstance().getCompleteHashTable();             // 완료 테이블
+
     public static ApplicationList getList(){
         return list;
     }
@@ -25,13 +34,29 @@ public final class ApplicationList {
         return htForPresent;
     }
 
+    public Hashtable<String, Application> getForAcceptTable() {
+        return forAcceptTable;
+    }
+
+    public Hashtable<String, Application> getForPaymentTable() {
+        return forPaymentTable;
+    }
+
+    public Hashtable<String, Application> getForActiveTable() {
+        return forActiveTable;
+    }
+
+    public Hashtable<String, Application> getForCompleteTable() {
+        return forCompleteTable;
+    }
+
     /**
      * 입력으로 들어온 신청 정보를
      * htForPresent 에 저장
      * @param application 추가할 신청 정보
      */
     public void addToPresent(Application application){
-        htForPresent.put(application.getApplicationID(), application);
+        forAcceptTable.put(application.getApplicationID(), application);
     }
 
     /**
@@ -42,9 +67,10 @@ public final class ApplicationList {
      */
     public void removeFromPresent(String applicationID){
         Application application;
-        application = htForPresent.get(applicationID);
-        htForPresent.remove(applicationID);
-        htForPast.put(application.getApplicationID(), application);
+        application = forAcceptTable.get(applicationID);
+        forAcceptTable.remove(applicationID);
+        application.setState(3);
+        forCompleteTable.put(applicationID, application);
     }
 
     /**
@@ -55,7 +81,7 @@ public final class ApplicationList {
      * @return key or null
      */
     public String isExistInPresent(String userID){
-        for(String key:htForPresent.keySet()){
+        for(String key:forAcceptTable.keySet()){
             if(key.split("-")[0].compareTo(userID) == 0){
                 return key;
             }

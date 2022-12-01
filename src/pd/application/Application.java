@@ -92,7 +92,7 @@ public class Application {
             return redundantID;
         }
         // 중복 정보가 없으면 신청 등록
-        this.setState(1);
+        this.setState(0);
         list.addToPresent(this);
         return null;
     }

@@ -1,5 +1,8 @@
 package hci;
 
+import pd.application.Application;
+import pd.application.ApplicationList;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -114,8 +117,21 @@ public class MemAppListUI extends JFrame implements ActionListener, MouseListene
 		 *
 		* for 문으로 해시 테이블에 있는 값 추가
 		* */
-		String[] a = {"1234", "11월 29일", "결제 대기"};
-		AppModel.addRow(a); // 데이터 추가
+		ApplicationList list = ApplicationList.getList();
+		Application application;
+		for(String key: list.getForAcceptTable().keySet()){
+			String temp = key.split("-")[0];
+				if(temp.compareTo("임시 ID") == 0){
+					 application = list.getForAcceptTable().get(key);
+					 String[] data = new String[3];
+					 data[0] = application.getApplicationID();
+					 data[1] = application.getPeriodOfService();
+					 data[2] = application.getState();
+					 AppModel.addRow(data);
+				}
+		}
+//		String[] a = {"1234", "11월 29일", "결제 대기"};
+//		AppModel.addRow(a); // 데이터 추가
 		
 		// 뒤로가기 버튼
 		JButton CancelButton = new JButton(CancelButtonicon1);
