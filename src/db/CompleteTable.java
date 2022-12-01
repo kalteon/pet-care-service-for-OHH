@@ -40,7 +40,7 @@ public class CompleteTable
 	}
 	//Complete Table에 추가
 	public void putCompleteHashTable(String applicationID, Application application) {
-		completehashtable = completeDM.readObjectData();
+		completehashtable = this.getCompleteHashTable();
 		completehashtable.put(applicationID, application);
 		completeDM.deletObjectData();
 		completeDM.writeObjectData(completehashtable);

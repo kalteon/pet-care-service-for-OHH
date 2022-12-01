@@ -1,7 +1,6 @@
 package db;
 
 import java.util.Hashtable;
-
 import pd.systemuser.PetSitter;
 
 /*
@@ -40,7 +39,7 @@ public class PetSitterTable
 
 	//돌봄이 추가
 	public void putPetSitterHashTable(String petsitterID, PetSitter petsitter) {
-		petsitterhashtable = petsitterDM.readObjectData();
+		petsitterhashtable = this.getPetSitterHashTable();
 		petsitterhashtable.put(petsitterID, petsitter);
 		petsitterDM.deletObjectData();
 		petsitterDM.writeObjectData(petsitterhashtable);

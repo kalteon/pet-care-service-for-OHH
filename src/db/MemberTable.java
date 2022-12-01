@@ -40,7 +40,7 @@ public class MemberTable
 	
 	//멤버 추가
 	public void putMemberHashTable(String memberID, Member member) {
-		memberhashtable = memberDM.readObjectData();
+		memberhashtable = this.getMemberHashTable();
 		memberhashtable.put(memberID, member);
 		memberDM.deletObjectData();
 		memberDM.writeObjectData(memberhashtable);

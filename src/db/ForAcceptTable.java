@@ -32,7 +32,7 @@ public class ForAcceptTable
     
     // ForPayment 단계로 이동
     public void moveForPayment(Application application) {
-    	foraccepthashtable = foracceptDM.readObjectData();
+    	foraccepthashtable = this.getForAcceptHashTable();
     	foraccepthashtable.remove(application.getApplicationID());
     	ForPaymentTable forpaymenttable = ForPaymentTable.getInstance();
     	application.setState(1);
@@ -51,7 +51,7 @@ public class ForAcceptTable
 	
 	//ForAcceptTable에 추가
 	public void putForAcceptHashTable(String applicationID, Application application) {
-		foraccepthashtable = foracceptDM.readObjectData();
+		foraccepthashtable = this.getForAcceptHashTable();
 		foraccepthashtable.put(applicationID, application);
 		foracceptDM.deletObjectData();
 		foracceptDM.writeObjectData(foraccepthashtable);

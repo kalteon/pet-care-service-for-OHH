@@ -32,7 +32,7 @@ public class ActiveTable
 
     //Complete로 상태 전환 및 이동
     public void moveComplete(Application application) {
-    	activehashtable = activeDM.readObjectData();
+    	activehashtable = this.getActiveHashTable();
     	activehashtable.remove(application.getApplicationID());
     	CompleteTable completetable = CompleteTable.getInstance();
     	application.setState(3);
@@ -50,7 +50,7 @@ public class ActiveTable
 	
 	//ActiveTable에 추가
 	public void putActiveHashTable(String applicationID, Application application) {
-		activehashtable = activeDM.readObjectData();
+		activehashtable = this.getActiveHashTable();
 		activehashtable.put(applicationID, application);
 		activeDM.deletObjectData();
 		activeDM.writeObjectData(activehashtable);

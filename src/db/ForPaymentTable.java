@@ -32,7 +32,7 @@ public class ForPaymentTable
 
     //Active로 상태 이동
     public void moveActive(Application application) {
-    	forpaymenthashtable = forpaymentDM.readObjectData();
+    	forpaymenthashtable = this.getForPaymentHashTable();
     	forpaymenthashtable.remove(application.getApplicationID());
     	ActiveTable activetable = ActiveTable.getInstance();
     	application.setState(2);
@@ -51,7 +51,7 @@ public class ForPaymentTable
 	
 	//ForPayment Table에 추가
 	public void putForPaymentHashTable(String applicationID, Application application) {
-		forpaymenthashtable = forpaymentDM.readObjectData();
+		forpaymenthashtable = this.getForPaymentHashTable();
 		forpaymenthashtable.put(applicationID, application);
 		forpaymentDM.deletObjectData();
 		forpaymentDM.writeObjectData(forpaymenthashtable);
