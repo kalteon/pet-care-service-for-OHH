@@ -52,7 +52,7 @@ public class ForPaymentDM {
 			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("file read false");
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		return null;
 	}

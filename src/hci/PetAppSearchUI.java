@@ -1,5 +1,8 @@
 package hci;
 
+import pd.application.Application;
+import pd.application.ApplicationList;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -109,6 +112,20 @@ public class PetAppSearchUI extends JFrame implements ActionListener, MouseListe
 		AppScroll.getViewport().setBackground(Color.WHITE);
 		
 		AppModel.removeRow(0); // 0번째 행 삭제(빈칸)
+		/**
+		 *
+		 * for 문으로 해시 테이블에 있는 값 추가
+		 * */
+		ApplicationList list = ApplicationList.getList();
+		Application application;
+		for(String key: list.getForAcceptTable().keySet()){
+			application = list.getForAcceptTable().get(key);
+			String[] data = new String[3];
+			data[0] = application.getLocation();
+			data[1] = application.getPeriodOfService();
+			data[2] = application.getPrice();
+			AppModel.addRow(data);
+		}
 		String a[] = {"경북대 IT대학", "11월 29일", "1800원"}; 
 		AppModel.addRow(a); // 데이터 추가
 		
