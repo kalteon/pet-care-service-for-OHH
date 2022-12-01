@@ -14,13 +14,13 @@ public final class ApplicationList {
     private ApplicationList() {}
 
     private final Hashtable<String, Application> forAcceptTable =
-            ForAcceptTable.getInstance().getForAcceptHashTable();           // 수락 대기 테이블
+            ForAcceptTable.getInstance().getHashTable();           // 수락 대기 테이블
     private final Hashtable<String, Application> forPaymentTable =
-            ForPaymentTable.getInstance().getForPaymentHashTable();         // 결제 대기 테이블
+            ForPaymentTable.getInstance().getHashTable();         // 결제 대기 테이블
     private final Hashtable<String, Application> forActiveTable =
-            ActiveTable.getInstance().getActiveHashTable();                 // 진행중 테이블
+            ActiveTable.getInstance().getHashTable();                 // 진행중 테이블
     private final Hashtable<String, Application> forCompleteTable =
-            CompleteTable.getInstance().getCompleteHashTable();             // 완료 테이블
+            CompleteTable.getInstance().getHashTable();             // 완료 테이블
 
     public static ApplicationList getList(){
         return list;
@@ -100,4 +100,5 @@ public final class ApplicationList {
         }
         System.out.println("");
     }
+    
 }
