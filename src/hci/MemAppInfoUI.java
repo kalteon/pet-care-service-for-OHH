@@ -417,7 +417,7 @@ public class MemAppInfoUI extends JFrame implements ActionListener {
 						Objects.requireNonNull(EndHourCombo.getSelectedItem()).toString());
 				application.setPeriodOfService(String.join(" ~ ", start, end));
 				application.setLocation(LocationField.getText());
-
+				System.out.println(application.getPeriodOfService());
 				if(ServiceCheck1.isSelected()){
 					services = services + ServiceCheck1.getText().split(" ")[0];
 				}
