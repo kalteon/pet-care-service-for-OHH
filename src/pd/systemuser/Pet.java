@@ -7,8 +7,8 @@ public class Pet {
     private String chronicDisease;          // 지병 여부
     private String kindOfFeed;              // 사료의 종류
 
-    // init
-    public Pet(String petName, int petAge, String petKind, String chronicDisease, String kindOfFeed){
+	// init
+    public Pet(String petName, int petAge, String petKind, String chronicDisease, String kindOfFeed, String userID){
         setPetName(petName);
         setPetAge(petAge);
         setPetKind(petKind);
@@ -33,7 +33,7 @@ public class Pet {
         this.kindOfFeed = kindOfFeed;
     }
 
-    // getter
+	// getter
     public String getPetName() {
         return petName;
     }
@@ -49,5 +49,5 @@ public class Pet {
     public String getKindOfFeed() {
         return kindOfFeed;
     }
-
+    
 }
